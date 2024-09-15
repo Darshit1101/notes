@@ -1,0 +1,2 @@
+//Plugins
+require('dotenv').config();
