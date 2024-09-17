@@ -1,1 +1,1 @@
-export { default as Test } from './Testing/Test.js';
+export { default as LoginCard } from './Login/LoginCard';

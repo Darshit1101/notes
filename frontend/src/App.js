@@ -1,14 +1,21 @@
 import './App.css';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import store from './Store';//redux
+import { Provider } from 'react-redux';//redux
 import en from '@shopify/polaris/locales/en.json';//shopify polaris
 import { AppProvider } from '@shopify/polaris';//shopify polaris
 import '@shopify/polaris/build/esm/styles.css';//shopify polaris
-import Test from './components/Testing/Test';
 
-function App() {
+function App(props) {
   return (
-    <AppProvider i18n={en}>
-      <Test />
-    </AppProvider>
+    <Provider store={store}>
+      <AppProvider i18n={en}>
+        <BrowserRouter>
+          <props.Component />
+        </BrowserRouter>
+      </AppProvider>
+    </Provider>
   );
 }
 
