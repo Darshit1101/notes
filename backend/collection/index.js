@@ -1,0 +1,1 @@
+global.modalForLogin = require('./login');

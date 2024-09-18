@@ -1,10 +1,14 @@
 import React from 'react'
+import { Page, Card } from '@shopify/polaris';
+import AuthCard from './AuthCard';
 
 function LoginCard(props) {
   return (
-    <div>
-        Add product
-    </div>
+    <Page>
+      <Card >
+        <AuthCard props={props} />
+      </Card>
+    </Page>
   )
 }
 
