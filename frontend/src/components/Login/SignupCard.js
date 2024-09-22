@@ -3,7 +3,6 @@ import { BlockStack, TextField, Text, InlineStack, Button, Box } from '@shopify/
 import { ArrowRightIcon } from '@shopify/polaris-icons';
 
 function SignupCard({ props }) {
-    console.log("SignupCard", props)
     const { state, validator, changeNameValue } = props;
 
     return (

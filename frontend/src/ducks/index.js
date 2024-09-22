@@ -1,7 +1,10 @@
 import { combineReducers } from "redux";
+import toast from './toast';
+import login from './login';
 
 const rootReducer = combineReducers({
-    // Add reducers here
+    toast,
+    login,
 });
 
 export default rootReducer;

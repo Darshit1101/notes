@@ -4,7 +4,7 @@ import { ArrowRightIcon } from '@shopify/polaris-icons';
 
 function SigninCard({ props }) {
   const { state, changeNameValue, validator, handleUserLogin } = props;
-  console.log("SigninCard", props)
+  
   return (
     <div>
       <BlockStack gap={200} >

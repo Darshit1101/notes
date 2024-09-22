@@ -1,6 +1,11 @@
+//express
 global.express = require('express');
 global.app = express();
 app.use(express.json());
+
+//cors
+const cors = require("cors");
+app.use(cors());
 
 //env
 global.dotenv = require('dotenv');

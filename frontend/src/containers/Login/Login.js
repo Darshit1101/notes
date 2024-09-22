@@ -1,7 +1,12 @@
 import { LoginCard } from '../../components';
 import React, { useCallback, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import * as loginDucks from '../../ducks/login';
+import { toastify } from '../../ducks/toast';
+import './Login.css';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [state, setState] = useState({
     isConfiguration: 'signUp',
     fn: '',
@@ -15,7 +20,14 @@ const Login = () => {
 
   // Register Data
   const registerData = () => {
-    console.log("Register Data", state)
+    let obj = {
+      fn: state.fn,
+      e: state.e,
+      pd: state.pd
+    }
+    console.log("Register Data", obj)
+    dispatch(loginDucks.postRegisterData(obj))
+    changeNameValue({ fn: '', e: '', pd: '' });
   }
 
   //login data
