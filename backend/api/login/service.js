@@ -10,4 +10,15 @@ module.exports = {
             return ({ status: 200, data: { status: 'error', m: msgObj.ERROR } });
         }
     },
-}  
+
+    createLogin: async (values) => {
+        try {
+            const { email, password } = values.body;
+            console.log('create login===>', values.body);
+            return ({ status: 200, data: { status: 'success', m: msgObj.LOGIN_SUCCESS } });
+        } catch (error) {
+            console.error('createLogin===>', error);
+            return ({ status: 200, data: { status: 'error', m: msgObj.ERROR } });
+        }
+    },
+}

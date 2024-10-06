@@ -8,7 +8,6 @@ function* postRegisterData(action) {
     try {
         // yield put(load());
         const res = yield call(api.POST, "/createRegister", action.payload);
-        console.log("Register Response", res)
         if (res.status === "success") {
             yield put(toastify({ type: "success", msg: res.m }));
         } else {
