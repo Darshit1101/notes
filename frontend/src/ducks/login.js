@@ -7,11 +7,13 @@ const login = createSlice({
   initialState,
   reducers: {
     postRegisterData: (state, action) => { },
+    postLoginData: (state, action) => { },
   }
 });
 
 export const {
   postRegisterData,
+  postLoginData,
 } = login.actions;
 
 export default login.reducer;

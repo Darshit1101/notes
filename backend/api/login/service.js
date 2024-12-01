@@ -23,7 +23,7 @@ module.exports = {
             // Find the user in the database
             const user = await modalForLogin.findOne({ e: email });
             if (!user) {
-                return { status: 404, data: { status: 'error', m: 'User not found.' } };
+                return { status: 404, data: { status: 'error', m: msgObj.LOGIN_USER_NOT_FOUND } };
             }
             return ({ status: 200, data: { status: 'success', m: msgObj.LOGIN_SUCCESS } });
         } catch (error) {

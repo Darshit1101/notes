@@ -25,14 +25,17 @@ const Login = () => {
       e: state.e,
       pd: state.pd
     }
-    console.log("Register Data", obj)
     dispatch(loginDucks.postRegisterData(obj))
     changeNameValue({ fn: '', e: '', pd: '' });
   }
 
   //login data
   const loginData = () => {
-    console.log("Login Data", state)
+    let obj = {
+      e: state.e,
+      pd: state.pd
+    }
+    dispatch(loginDucks.postLoginData(obj))
   }
 
   return (
