@@ -7,6 +7,9 @@ app.use(express.json());
 const cors = require("cors");
 app.use(cors());
 
+//token
+global.jwt = require('jsonwebtoken');
+
 //env
 global.dotenv = require('dotenv');
 global.env = dotenv.config().parsed;
