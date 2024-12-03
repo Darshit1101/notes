@@ -1,13 +1,14 @@
-import { LoginCard } from '../../components';
+import { SignUpCard } from '../../components';
 import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginDucks from '../../ducks/login';
 import { toastify } from '../../ducks/toast';
-import './Login.css';
+import './SignUp.css';
 
-const Login = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
+    fn: '',
     e: '',
     pd: '',
   })
@@ -16,23 +17,24 @@ const Login = () => {
     setState((prevState) => ({ ...prevState, ...obj }));
   }, []);
 
-  //login data
-  const loginData = () => {
+  // Register Data
+  const registerData = () => {
     let obj = {
+      fn: state.fn,
       e: state.e,
       pd: state.pd
     }
-    dispatch(loginDucks.postLoginData(obj))
-    changeNameValue({ e: '', pd: '' });
+    dispatch(loginDucks.postRegisterData(obj))
+    changeNameValue({ fn: '', e: '', pd: '' });
   }
 
   return (
-    <LoginCard
+    <SignUpCard
       state={state}
       changeNameValue={changeNameValue}
-      loginData={loginData}//login data
+      registerData={registerData}//register data
     />
   )
 }
 
-export default Login;
+export default SignUp;
