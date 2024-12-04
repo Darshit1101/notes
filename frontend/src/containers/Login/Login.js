@@ -1,15 +1,17 @@
 import { LoginCard } from '../../components';
 import React, { useCallback, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as loginDucks from '../../ducks/login';
-import { toastify } from '../../ducks/toast';
+import SimpleReactValidator from "simple-react-validator";
 import './Login.css';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const validator = new SimpleReactValidator({ locale: 'en' });
   const [state, setState] = useState({
     e: '',
     pd: '',
+    errMessage: {}
   })
 
   const changeNameValue = useCallback((obj) => {
@@ -18,12 +20,19 @@ const Login = () => {
 
   //login data
   const loginData = () => {
-    let obj = {
-      e: state.e,
-      pd: state.pd
+    if (!validator.allValid()) {
+      validator.showMessages();
+      validator.helpers.forceUpdateIfNeeded();
+      changeNameValue({ errMessage: validator.errorMessages });
     }
-    dispatch(loginDucks.postLoginData(obj))
-    changeNameValue({ e: '', pd: '' });
+    else {
+      let obj = {
+        e: state.e,
+        pd: state.pd
+      }
+      dispatch(loginDucks.postLoginData(obj))
+      changeNameValue({ e: '', pd: '', errMessage: {} });
+    }
   }
 
   return (
@@ -31,6 +40,7 @@ const Login = () => {
       state={state}
       changeNameValue={changeNameValue}
       loginData={loginData}//login data
+      validator={validator}
     />
   )
 }

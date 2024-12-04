@@ -1,31 +1,40 @@
 import { SignUpCard } from '../../components';
 import React, { useCallback, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as loginDucks from '../../ducks/login';
-import { toastify } from '../../ducks/toast';
+import SimpleReactValidator from "simple-react-validator";
 import './SignUp.css';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const validator = new SimpleReactValidator({ locale: 'en' });
   const [state, setState] = useState({
     fn: '',
     e: '',
     pd: '',
+    errMessage: {}
   })
-
+  
   const changeNameValue = useCallback((obj) => {
     setState((prevState) => ({ ...prevState, ...obj }));
   }, []);
 
   // Register Data
   const registerData = () => {
-    let obj = {
-      fn: state.fn,
-      e: state.e,
-      pd: state.pd
+    if (!validator.allValid()) {
+      validator.showMessages();
+      validator.helpers.forceUpdateIfNeeded();
+      changeNameValue({ errMessage: validator.errorMessages });
     }
-    dispatch(loginDucks.postRegisterData(obj))
-    changeNameValue({ fn: '', e: '', pd: '' });
+    else {
+      let obj = {
+        fn: state.fn,
+        e: state.e,
+        pd: state.pd
+      }
+      dispatch(loginDucks.postRegisterData(obj))
+      changeNameValue({ fn: '', e: '', pd: '', errMessage: {} });
+    }
   }
 
   return (
@@ -33,6 +42,7 @@ const SignUp = () => {
       state={state}
       changeNameValue={changeNameValue}
       registerData={registerData}//register data
+      validator={validator}
     />
   )
 }
