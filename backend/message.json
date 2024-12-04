@@ -1,5 +1,4 @@
 {
-  "LOGIN_SUCCESS": "Login success",
   "LOGIN_FAILED": "Login failed",
   "LOGIN_USER_NOT_FOUND": "User not found",
   "INVALID_CREDENTIALS": "Invalid credentials",

@@ -44,7 +44,16 @@ module.exports = {
             // Generate JWT token
             const token = jwt.sign({ id: user._id, email: user.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
 
-            return ({ status: 200, data: { status: 'success', m: msgObj.LOGIN_SUCCESS, token: token, } });
+            return ({
+                status: 200,
+                data: {
+                    status: 'success',
+                    data: {
+                        token: token,
+                        email: user.e.toLowerCase(),
+                    }
+                }
+            });
         } catch (error) {
             console.error('createLogin===>', error);
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
