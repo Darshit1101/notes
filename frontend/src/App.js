@@ -6,7 +6,9 @@ import { Provider } from 'react-redux';//redux
 import en from '@shopify/polaris/locales/en.json';//shopify polaris
 import { AppProvider } from '@shopify/polaris';//shopify polaris
 import '@shopify/polaris/build/esm/styles.css';//shopify polaris
-import { Toastify } from './components';
+import { Toastify, EntryCard } from './components';
+
+let authToken = localStorage.getItem('authToken');
 
 function App(props) {
   return (
@@ -15,6 +17,12 @@ function App(props) {
         <Toastify />
         <BrowserRouter>
           <props.Component />
+          {/* {
+            authToken ?
+              <EntryCard component={<props.Component />} />
+              :
+              <props.Component />
+          } */}
         </BrowserRouter>
       </AppProvider>
     </Provider>

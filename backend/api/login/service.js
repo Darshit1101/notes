@@ -18,7 +18,21 @@ module.exports = {
 
             let registerData = new modalForLogin(registerObj); // Create a new user document
             await registerData.save(); // Save the user to the database
-            return ({ status: 200, data: { status: 'success', m: msgObj.REGISTRATION_SUCCESS } });
+
+            // Generate JWT token
+            const token = jwt.sign({ id: registerData._id, email: registerData.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
+
+            return ({
+                status: 200,
+                data: {
+                    status: 'success',
+                    data: {
+                        t: token,
+                        e: registerData.e.toLowerCase(),
+                        fn: registerData.fn,
+                    }
+                }
+            });
         } catch (error) {
             console.error('createRegister===>', error);
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
