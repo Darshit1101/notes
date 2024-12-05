@@ -49,8 +49,9 @@ module.exports = {
                 data: {
                     status: 'success',
                     data: {
-                        token: token,
-                        email: user.e.toLowerCase(),
+                        t: token,
+                        e: user.e.toLowerCase(),
+                        fn: user.fn,
                     }
                 }
             });

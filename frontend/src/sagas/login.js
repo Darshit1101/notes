@@ -25,7 +25,9 @@ function* postLoginData(action) {
         // yield put(load());
         const res = yield call(api.POST, "/createLogin", action.payload);
         if (res.status === "success") {
-            localStorage.setItem('email', res.data.email);
+            localStorage.setItem('email', res.data.e);
+            localStorage.setItem('authToken', res.data.t);
+            localStorage.setItem('username', res.data.fn);
         } else {
             yield put(toastify({ type: "error", msg: res.m }));
         }
