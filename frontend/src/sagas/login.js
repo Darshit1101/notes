@@ -12,6 +12,9 @@ function* postRegisterData(action) {
             localStorage.setItem('email', res.data.e);
             localStorage.setItem('authToken', res.data.t);
             localStorage.setItem('username', res.data.fn);
+            setTimeout(() => {
+                window.location.href = '/dashboard'
+            }, 1000);
         } else {
             yield put(toastify({ type: "error", msg: res.m }));
         }

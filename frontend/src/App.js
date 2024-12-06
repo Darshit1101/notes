@@ -16,13 +16,12 @@ function App(props) {
       <AppProvider i18n={en}>
         <Toastify />
         <BrowserRouter>
-          <props.Component />
-          {/* {
+          {
             authToken ?
               <EntryCard component={<props.Component />} />
               :
               <props.Component />
-          } */}
+          }
         </BrowserRouter>
       </AppProvider>
     </Provider>

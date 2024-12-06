@@ -1,8 +1,9 @@
 import React from 'react'
+import { HeaderCard } from '..';
 
-function EntryCard() {
+function EntryCard(props) {
   return (
-    <div>EntryCard</div>
+    <HeaderCard component={props.component} />
   )
 }
 

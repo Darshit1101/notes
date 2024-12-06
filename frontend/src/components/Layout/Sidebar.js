@@ -1,11 +1,11 @@
 import React from 'react'
-import {Frame, Navigation} from '@shopify/polaris';
-import {HomeIcon, OrderIcon, ProductIcon} from '@shopify/polaris-icons';
+import { Navigation } from '@shopify/polaris';
+import { HomeIcon,OrderIcon,ProductIcon } from '@shopify/polaris-icons';
 
 function Sidebar() {
   return (
     <div>
-       <Navigation location="/">
+      <Navigation location="/">
         <Navigation.Section
           items={[
             {
