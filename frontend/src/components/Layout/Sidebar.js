@@ -3,6 +3,8 @@ import { Navigation } from '@shopify/polaris';
 import { HomeIcon } from '@shopify/polaris-icons';
 
 function Sidebar() {
+  let path = window.location.pathname;
+  
   return (
     <div>
       <Navigation location="/">
@@ -10,7 +12,7 @@ function Sidebar() {
           items={[
             {
               url: '#',
-              label: 'Home',
+              label: 'Dashboard',
               excludePaths: ['#'],
               icon: HomeIcon,
             },
