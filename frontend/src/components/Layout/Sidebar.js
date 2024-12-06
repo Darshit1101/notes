@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigation } from '@shopify/polaris';
-import { HomeIcon,OrderIcon,ProductIcon } from '@shopify/polaris-icons';
+import { HomeIcon } from '@shopify/polaris-icons';
 
 function Sidebar() {
   return (
@@ -11,20 +11,8 @@ function Sidebar() {
             {
               url: '#',
               label: 'Home',
+              excludePaths: ['#'],
               icon: HomeIcon,
-            },
-            {
-              url: '#',
-              excludePaths: ['#'],
-              label: 'Orders',
-              icon: OrderIcon,
-              badge: '15',
-            },
-            {
-              url: '#',
-              excludePaths: ['#'],
-              label: 'Products',
-              icon: ProductIcon,
             },
           ]}
         />

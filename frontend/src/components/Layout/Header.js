@@ -8,10 +8,12 @@ function Header(props) {
   const [searchValue, setSearchValue] = useState('');
   const [userMenuActive, setUserMenuActive] = useState(false);
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
+
   const handleSearchResultsDismiss = useCallback(() => {
     setSearchActive(false);
     setSearchValue('');
   }, []);
+
   const handleSearchFieldChange = useCallback((value) => {
     setSearchValue(value);
     setSearchActive(value.length > 0);
@@ -21,6 +23,7 @@ function Header(props) {
     () => setUserMenuActive((userMenuActive) => !userMenuActive),
     [],
   );
+
   const toggleMobileNavigationActive = useCallback(
     () =>
       setMobileNavigationActive(
@@ -33,17 +36,11 @@ function Header(props) {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
     localStorage.removeItem('email');
-    setTimeout(() => {
-      window.location.href = '/login';
-    }, 1000);
+    window.location.href = '/login';
   }
 
   const userMenuActions = [{
     items: [
-      {
-        content: 'Your profile',
-        // onAction: () => navigate('/profile')
-      },
       {
         content: 'Log out',
         onAction: () => handleLogout()
@@ -55,7 +52,6 @@ function Header(props) {
     <TopBar.UserMenu
       actions={userMenuActions}
       name="Dharma"
-      detail={'storeName'}
       initials="D"
       open={userMenuActive}
       onToggle={toggleUserMenuActive}
