@@ -3,7 +3,7 @@ import React from 'react'
 function TestingCard() {
     return (
         <div>
-            ok 
+            <h1>Testing Card</h1>
         </div>
     )
 }
