@@ -1,16 +1,20 @@
 #link_login_register {
-    color: #007bff;
-    cursor: pointer;
-    margin-top: 6px;
+  color: #007bff;
+  cursor: pointer;
+  margin-top: 6px;
 }
 
 .page-login-wrap {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .page-login-wrap .Polaris-Page {
-    max-width: 480px;
-    width: 100%;
+  max-width: 480px;
+  width: 100%;
+}
+
+.Polaris-TopBar__Logo {
+  height: 35px;
 }

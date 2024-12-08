@@ -1,0 +1,1 @@
+export { default as notes_logo } from '../../src/containers/App/Assets/img/notes_logo.svg';

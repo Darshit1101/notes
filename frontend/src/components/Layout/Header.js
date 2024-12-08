@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar';
 import { Frame, TopBar, } from '@shopify/polaris';
 import { useState, useCallback } from 'react';
+import { notes_logo } from '../../img';
 
 function Header(props) {
   const [searchActive, setSearchActive] = useState(false);
@@ -79,7 +80,7 @@ function Header(props) {
 
   const logo = {
     width: 86,
-    topBarSource:'https://cdn.shopify.com/s/files/1/2376/3301/files/Shopify_Secondary_Inverted.png',
+    topBarSource: notes_logo,
     accessibilityLabel: 'Notes',
   };
 
