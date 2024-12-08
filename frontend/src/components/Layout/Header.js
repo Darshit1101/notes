@@ -52,7 +52,6 @@ function Header(props) {
     <TopBar.UserMenu
       actions={userMenuActions}
       name="Dharma"
-      initials="D"
       open={userMenuActive}
       onToggle={toggleUserMenuActive}
     />

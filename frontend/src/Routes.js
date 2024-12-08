@@ -14,7 +14,7 @@ const MyRoutes = () => {
             <Routes>
                 {authToken ?
                     <>
-                        <Route path="/test" element={<LazyTest />} />
+                        <Route path="/testing" element={<LazyTest />} />
                         <Route path="/dashboard" element={<LazyDashboard />} />
                     </>
                     :

@@ -14,3 +14,7 @@
     max-width: 480px;
     width: 100%;
 }
+
+.Polaris-MessageIndicator__MessageIndicatorWrapper{
+    display: none;
+}
