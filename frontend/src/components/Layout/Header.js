@@ -11,7 +11,7 @@ function Header(props) {
   const [state, setState] = useState({
     profile: {}
   })
-  
+
   //set data in state
   const changeNameValue = useCallback((obj) => {
     setState((prevState) => ({ ...prevState, ...obj }));
@@ -28,6 +28,7 @@ function Header(props) {
   //get profile data api call
   useEffect(() => {
     let userId = localStorage.getItem('id');
+    console.log('userId', userId);  
     dispatch(authDucks.getProfile(userId));
   }, []);
 
@@ -80,7 +81,7 @@ function Header(props) {
     <TopBar.UserMenu
       actions={userMenuActions}
       name={state.profile?.fn}
-      initials='D'
+      initials={state.profile?.fn?.charAt(0).toUpperCase()}
       open={userMenuActive}
       onToggle={toggleUserMenuActive}
     />

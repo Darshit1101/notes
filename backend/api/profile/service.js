@@ -10,7 +10,7 @@ module.exports = {
         fn: user.fn,
         e: user.e,
       };
-      
+
       return ({ status: 200, data: { status: 'success', data: Profile } });
     }
     catch (e) {
