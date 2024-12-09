@@ -1,14 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar';
 import { Frame, TopBar, } from '@shopify/polaris';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { notes_logo } from '../../img';
+import * as authDucks from '../../ducks/auth';
 
 function Header(props) {
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
+    profile: {}
+  })
+  
+  //set data in state
+  const changeNameValue = useCallback((obj) => {
+    setState((prevState) => ({ ...prevState, ...obj }));
+  }, []);
+
   const [searchActive, setSearchActive] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [userMenuActive, setUserMenuActive] = useState(false);
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
+
+  //get profile data using redux useSelector
+  const profile = useSelector((state) => state.auth.profile);
+
+  //get profile data api call
+  useEffect(() => {
+    let userId = localStorage.getItem('id');
+    dispatch(authDucks.getProfile(userId));
+  }, []);
+
+  //set profile data in state
+  useEffect(() => {
+    changeNameValue({ profile: profile });
+  }, [profile]);
 
   const handleSearchResultsDismiss = useCallback(() => {
     setSearchActive(false);
@@ -37,6 +63,7 @@ function Header(props) {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
     localStorage.removeItem('email');
+    localStorage.removeItem('id');
     window.location.href = '/login';
   }
 
@@ -52,7 +79,7 @@ function Header(props) {
   const userMenuMarkup = (
     <TopBar.UserMenu
       actions={userMenuActions}
-      name="Dharma"
+      name={state.profile?.fn}
       initials='D'
       open={userMenuActive}
       onToggle={toggleUserMenuActive}

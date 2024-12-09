@@ -12,6 +12,7 @@ function* postRegisterData(action) {
             localStorage.setItem('email', res.data.e);
             localStorage.setItem('authToken', res.data.t);
             localStorage.setItem('username', res.data.fn);
+            localStorage.setItem('userId', res.data.id);
             setTimeout(() => {
                 window.location.href = '/dashboard'
             }, 1000);
@@ -33,6 +34,7 @@ function* postLoginData(action) {
             localStorage.setItem('email', res.data.e);
             localStorage.setItem('authToken', res.data.t);
             localStorage.setItem('username', res.data.fn);
+            localStorage.setItem('id', res.data.id);
             setTimeout(() => {
                 window.location.href = '/dashboard'
             }, 1000);

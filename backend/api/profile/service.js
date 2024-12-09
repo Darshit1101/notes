@@ -1,11 +1,16 @@
 module.exports = {
   getProfile: async (values) => {
-    const { _id: id, } = values.body;
-    let Profile
+    const userId = values.query;
     try {
-      profile = 10
-      console.log('prodile==========:', profile);
-      console.log('id==========:', values.body);
+      // Find the user in the database
+      const user = await modalForLogin.findOne({ _id: new mongoose.Types.ObjectId(userId) });
+
+      // Create the Profile object with the user data
+      const Profile = {
+        fn: user.fn,
+        e: user.e,
+      };
+      
       return ({ status: 200, data: { status: 'success', data: Profile } });
     }
     catch (e) {
