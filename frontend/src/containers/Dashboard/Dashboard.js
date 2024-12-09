@@ -1,5 +1,6 @@
 import React from 'react'
-import { Page, Card, Grid } from '@shopify/polaris';
+import { Page, Card, Grid, Button, Icon, InlineStack, Box } from '@shopify/polaris';
+import { PlusIcon } from '@shopify/polaris-icons';
 
 const Dashboard = () => {
   return (
@@ -7,6 +8,17 @@ const Dashboard = () => {
       <Page
         title="Notes"
         subtitle="Your Digital Notebook"
+        primaryAction={<Button variant="primary">
+          <InlineStack blockAlign='center'>
+            <Box paddingInlineEnd={100}>
+              <Icon
+                source={PlusIcon}
+              />
+            </Box>
+            <span>Add notes</span>
+          </InlineStack>
+        </Button>}
+
       >
         <Card>
           <Grid>

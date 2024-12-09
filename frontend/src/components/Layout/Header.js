@@ -28,7 +28,6 @@ function Header(props) {
   //get profile data api call
   useEffect(() => {
     let userId = localStorage.getItem('id');
-    console.log('userId', userId);  
     dispatch(authDucks.getProfile(userId));
   }, []);
 
