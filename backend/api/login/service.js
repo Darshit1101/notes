@@ -30,6 +30,7 @@ module.exports = {
                         t: token,
                         e: registerData.e.toLowerCase(),
                         fn: registerData.fn,
+                        id: registerData._id
                     }
                 }
             });
@@ -66,6 +67,7 @@ module.exports = {
                         t: token,
                         e: user.e.toLowerCase(),
                         fn: user.fn,
+                        id: user._id,
                     }
                 }
             });
