@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 const LazyLogin = lazy(() => import('./containers/Login/Login'));
 const LazyTest = lazy(() => import('./containers/Testing/Test'));
@@ -14,6 +14,7 @@ const MyRoutes = () => {
             <Routes>
                 {authToken ?
                     <>
+                        <Route path='*' element={<Navigate to="/dashboard" replace />} />
                         <Route path="/testing" element={<LazyTest />} />
                         <Route path="/dashboard" element={<LazyDashboard />} />
                     </>
