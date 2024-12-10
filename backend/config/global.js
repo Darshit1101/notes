@@ -20,5 +20,8 @@ mongoose.Promise = global.Promise;
 global.connection = mongoose.createConnection(process.env.MONGO_CONNECTION_URL);
 global.Schema = mongoose.Schema;
 
+//write short Schema (mongoose.Schema.Types.ObjectId)
+global.ObjectId = require('mongoose').Types.ObjectId;
+
 //Other Files
 global.msgObj = require('../message.json');
