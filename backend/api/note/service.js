@@ -31,8 +31,9 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
+            const { uid } = values.body
             // Fetch all notes from the database    
-            const notes = await modalForNote.find({});
+            const notes = await modalForNote.find({ uid: uid });
 
             return {
                 status: 200,

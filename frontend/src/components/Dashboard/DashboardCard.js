@@ -1,9 +1,12 @@
 import React from 'react'
-import { Page, Card, Grid, Button, Icon, InlineStack, Box } from '@shopify/polaris';
+import {
+  Page, Card, Grid, Button, Icon, InlineStack, Box, Modal, TextField, InlineGrid, Text, EmptyState, SkeletonBodyText, SkeletonDisplayText,
+  BlockStack
+} from '@shopify/polaris';
 import { PlusIcon } from '@shopify/polaris-icons';
 
 function DashboardCard(props) {
-  const { handleAddNote } = props;
+  const { state, changeNameValue, handleAddNote } = props;
 
   return (
     <div>
@@ -22,31 +25,93 @@ function DashboardCard(props) {
         </Button>}
 
       >
-        <Card>
-          <Grid>
-            <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
-              <Card title="Sales" sectioned>
-                <p>View a summary of your online store’s sales.</p>
+        {state?.Allnotes && state?.Allnotes.length > 0 ?
+
+          <InlineGrid columns={{ xl: 3, lg: 3, md: 2, sm: 1, xs: 1 }} gap={400}>
+            {state?.Allnotes && state?.Allnotes.length > 0 ? state.Allnotes.map((data, index) => {
+              return (
+                <Box background="bg-surface" borderRadius="200" borderColor="border" borderWidth="025" padding="400" key={index}>
+                  <BlockStack gap={100}>
+                    <Text variant='headingMd' as='p' fontWeight='semibold'> {data.tit}</Text>
+                    <Text tone="subdued" id='des'>
+                      {data.des}
+                    </Text>
+                  </BlockStack>
+                </Box>
+              )
+            }) : 'No notes available'}
+          </InlineGrid>
+          :
+          <>
+            {/* {isLoading ?
+              <InlineGrid columns={3} gap={300}>
+                <Card gap={400}>
+                  <BlockStack gap={300}>
+                    <SkeletonDisplayText size="small" />
+                    <SkeletonBodyText lines={2} />
+                  </BlockStack>
+                </Card>
+                <Card gap={400}>
+                  <BlockStack gap={300}>
+                    <SkeletonDisplayText size="small" />
+                    <SkeletonBodyText lines={2} />
+                  </BlockStack>
+                </Card>
+                <Card gap={400}>
+                  <BlockStack gap={300}>
+                    <SkeletonDisplayText size="small" />
+                    <SkeletonBodyText lines={2} />
+                  </BlockStack>
+                </Card>
+              </InlineGrid>
+              :
+              state?.Allnotes && state?.Allnotes.length === 0 && <Card sectioned>
+                <EmptyState
+                  heading="You have not added any notifications yet."
+                  action={{ content: 'Add Notification', url: '/' }}
+                  image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
+                  fullWidth
+                >
+                </EmptyState>
               </Card>
-            </Grid.Cell>
-            <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
-              <Card title="Orders" sectioned>
-                <p>View a summary of your online store’s orders.</p>
-              </Card>
-            </Grid.Cell>
-            <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
-              <Card title="Orders" sectioned>
-                <p>View a summary of your online store’s orders.</p>
-              </Card>
-            </Grid.Cell>
-            <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
-              <Card title="Orders" sectioned>
-                <p>View a summary of your online store’s orders.</p>
-              </Card>
-            </Grid.Cell>
-          </Grid>
-        </Card>
+            } */}
+          </>
+        }
       </Page>
+
+      {/* add note modal  */}
+      <Modal
+        open={state.addNoteModal}
+        title="Add new note"
+        onClose={(e) => { props.openCloseModal('addNoteModal', state.addNoteModal, e) }}
+      >
+        <Modal.Section>
+          <TextField
+            label="Title"
+            placeholder='Enter title'
+            value={state.tit}
+            onChange={(e) => changeNameValue({ tit: e })}
+            autoComplete="off"
+          />
+          <Box paddingBlockStart={200} paddingBlockEnd={200}>
+            <TextField
+              label="Description"
+              placeholder='Enter description'
+              multiline={4}
+              value={state.des}
+              onChange={(e) => changeNameValue({ des: e })}
+              autoComplete="off"
+            />
+          </Box>
+          <InlineStack align='start'>
+            <Box paddingBlockEnd={100} paddingBlockStart={200}>
+              <Button size="large" id='Add' onClick={() => {
+                props.handleSaveNote();
+              }}>Add</Button>
+            </Box>
+          </InlineStack>
+        </Modal.Section>
+      </Modal>
     </div>
   )
 }

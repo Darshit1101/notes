@@ -22,8 +22,27 @@ function* addNote(action) {
   }
 }
 
+function* getAllNote(action) {
+  try {
+    // yield put(load());
+    const res = yield call(api.POST, '/getAllNotes', action.payload);
+
+    if (res.status === 'success') {
+      yield put(actions.getAllNoteSuccess(res));
+    }
+    else {
+      yield put(toastify({ type: 'error', msg: res.m }));
+    }
+    // yield put(loaded());
+  } catch (error) {
+    // yield put(loaded());
+    yield put(toastify({ type: 'error', msg: 'Something went wrong while doing. Please try again.' }));
+  }
+}
+
 export function* watchGetDashboard() {
   yield takeLatest(actions.addNote.type, addNote);
+  yield takeLatest(actions.getAllNote.type, getAllNote);
 }
 
 export default function* rootSaga() {

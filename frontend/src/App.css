@@ -18,3 +18,7 @@
 .Polaris-TopBar__Logo {
   height: 35px;
 }
+
+.Polaris-Button--variantTertiary {
+  background: var(--pc-button-bg_hover) !important;
+}
