@@ -18,13 +18,10 @@ const Dashboard = () => {
     setState((prevState) => ({ ...prevState, ...obj }));
   }, []);
 
+  let objData = { uid: localStorage.getItem('id') };
   const getdataList = useSelector(state => state.dashboard.getAll?.data)
 
   useEffect(() => {
-    let objData = {
-      uid: localStorage.getItem('id')
-    };
-    console.log("objData", objData)
     dispatch(dashboardDucks.getAllNote(objData));
   }, [])
 
@@ -56,6 +53,9 @@ const Dashboard = () => {
     dispatch(dashboardDucks.addNote(obj));
     changeNameValue({ tit: '', des: '' });
     openCloseModal('addNoteModal', state.addNoteModal, 'close');
+    setTimeout(() => {
+      dispatch(dashboardDucks.getAllNote(objData));
+    }, 100)
   }
 
   return (

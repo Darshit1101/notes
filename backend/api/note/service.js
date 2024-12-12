@@ -14,13 +14,13 @@ module.exports = {
             });
 
             // Save the new note to the database
-            const savedNote = await newNote.save();
+            await newNote.save();
 
             return ({
                 status: 200,
                 data: {
                     status: 'success',
-                    data: savedNote
+                    data: 'Add this note'
                 }
             });
         } catch (error) {
@@ -32,6 +32,7 @@ module.exports = {
     getAllNotes: async (values) => {
         try {
             const { uid } = values.body
+
             // Fetch all notes from the database    
             const notes = await modalForNote.find({ uid: uid });
 

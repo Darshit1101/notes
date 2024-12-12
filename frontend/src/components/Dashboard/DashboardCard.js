@@ -1,12 +1,14 @@
 import React from 'react'
 import {
-  Page, Card, Grid, Button, Icon, InlineStack, Box, Modal, TextField, InlineGrid, Text, EmptyState, SkeletonBodyText, SkeletonDisplayText,
+  Page, Card, Button, Icon, InlineStack, Box, Modal, TextField, InlineGrid, Text, EmptyState, SkeletonBodyText, SkeletonDisplayText,
   BlockStack
 } from '@shopify/polaris';
 import { PlusIcon } from '@shopify/polaris-icons';
+import { useSelector } from 'react-redux';
 
 function DashboardCard(props) {
   const { state, changeNameValue, handleAddNote } = props;
+  const isLoading = useSelector(state => state.loading.isLoading);
 
   return (
     <div>
@@ -39,11 +41,11 @@ function DashboardCard(props) {
                   </BlockStack>
                 </Box>
               )
-            }) : 'No notes available'}
+            }) : ''}
           </InlineGrid>
           :
           <>
-            {/* {isLoading ?
+            {isLoading ?
               <InlineGrid columns={3} gap={300}>
                 <Card gap={400}>
                   <BlockStack gap={300}>
@@ -67,14 +69,14 @@ function DashboardCard(props) {
               :
               state?.Allnotes && state?.Allnotes.length === 0 && <Card sectioned>
                 <EmptyState
-                  heading="You have not added any notifications yet."
-                  action={{ content: 'Add Notification', url: '/' }}
+                  heading="You have not added any notes yet."
+                  action={{ content: 'Add note', onClick: handleAddNote }}
                   image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
                   fullWidth
                 >
                 </EmptyState>
               </Card>
-            } */}
+            }
           </>
         }
       </Page>
