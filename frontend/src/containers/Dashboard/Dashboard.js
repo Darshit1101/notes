@@ -19,7 +19,7 @@ const Dashboard = () => {
   }, []);
 
   let objData = { uid: localStorage.getItem('id') };
-  const getdataList = useSelector(state => state.dashboard.getAll?.data)
+  const getdataList = useSelector(state => state.dashboard.getAll)
 
   useEffect(() => {
     dispatch(dashboardDucks.getAllNote(objData));

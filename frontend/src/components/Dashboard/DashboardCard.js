@@ -27,10 +27,10 @@ function DashboardCard(props) {
         </Button>}
 
       >
-        {state?.Allnotes && state?.Allnotes.length > 0 ?
+        {state.Allnotes && state.Allnotes.length > 0 ?
 
           <InlineGrid columns={{ xl: 3, lg: 3, md: 2, sm: 1, xs: 1 }} gap={400}>
-            {state?.Allnotes && state?.Allnotes.length > 0 ? state.Allnotes.map((data, index) => {
+            {state.Allnotes && state.Allnotes.length > 0 ? state.Allnotes.map((data, index) => {
               return (
                 <Box background="bg-surface" borderRadius="200" borderColor="border" borderWidth="025" padding="400" key={index}>
                   <BlockStack gap={100}>
@@ -67,7 +67,7 @@ function DashboardCard(props) {
                 </Card>
               </InlineGrid>
               :
-              state?.Allnotes && state?.Allnotes.length === 0 && <Card sectioned>
+              state.Allnotes && state.Allnotes.length === 0 && <Card sectioned>
                 <EmptyState
                   heading="You have not added any notes yet."
                   action={{ content: 'Add note', onClick: handleAddNote }}

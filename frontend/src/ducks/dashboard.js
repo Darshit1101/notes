@@ -7,9 +7,6 @@ const dashboard = createSlice({
   initialState,
   reducers: {
     addNote: (state, action) => { },
-    addNoteSuccess: (state, action) => {
-      return { ...state, addNoteList: action.payload };
-    },
     getAllNote: (state, action) => { },
     getAllNoteSuccess: (state, action) => {
       return { ...state, getAll: action.payload };
@@ -19,7 +16,6 @@ const dashboard = createSlice({
 
 export const {
   addNote,
-  addNoteSuccess,
   getAllNote,
   getAllNoteSuccess
 } = dashboard.actions;

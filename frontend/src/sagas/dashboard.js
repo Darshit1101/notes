@@ -8,9 +8,8 @@ function* addNote(action) {
   try {
     yield put(load());
     const res = yield call(api.POST, '/addnote', action.payload);
-    console.log('res.data====', res.data);
     if (res.status === 'success') {
-      yield put(actions.addNoteSuccess(res));
+      yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {
       yield put(toastify({ type: 'error', msg: res.m }));
@@ -26,9 +25,8 @@ function* getAllNote(action) {
   try {
     yield put(load());
     const res = yield call(api.POST, '/getAllNotes', action.payload);
-    console.log('res.data====', res.data);
     if (res.status === 'success') {
-      yield put(actions.getAllNoteSuccess(res));
+      yield put(actions.getAllNoteSuccess(res.data));
     }
     else {
       yield put(toastify({ type: 'error', msg: res.m }));

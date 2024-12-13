@@ -20,7 +20,7 @@ module.exports = {
                 status: 200,
                 data: {
                     status: 'success',
-                    data: 'Add this note'
+                    m: 'Add this note'
                 }
             });
         } catch (error) {
