@@ -1,9 +1,9 @@
 import React from 'react'
 import {
   Page, Card, Button, Icon, InlineStack, Box, Modal, TextField, InlineGrid, Text, EmptyState, SkeletonBodyText, SkeletonDisplayText,
-  BlockStack
+  BlockStack, Banner, Divider
 } from '@shopify/polaris';
-import { PlusIcon } from '@shopify/polaris-icons';
+import { PlusIcon, DeleteIcon, ViewIcon, EditIcon } from '@shopify/polaris-icons';
 import { useSelector } from 'react-redux';
 
 function DashboardCard(props) {
@@ -32,14 +32,48 @@ function DashboardCard(props) {
           <InlineGrid columns={{ xl: 3, lg: 3, md: 2, sm: 1, xs: 1 }} gap={400}>
             {state.Allnotes && state.Allnotes.length > 0 ? state.Allnotes.map((data, index) => {
               return (
-                <Box background="bg-surface" borderRadius="200" borderColor="border" borderWidth="025" padding="400" key={index}>
-                  <BlockStack gap={100}>
-                    <Text variant='headingMd' as='p' fontWeight='semibold'> {data.tit}</Text>
-                    <Text tone="subdued" id='des'>
-                      {data.des}
-                    </Text>
-                  </BlockStack>
-                </Box>
+                <>
+                  <Box background="bg-surface" borderRadius="200" borderColor="border" borderWidth="025" padding="400" key={index}>
+                    <BlockStack gap={100}>
+                      <Text variant='headingMd' as='p' fontWeight='semibold' id='des'> {data.tit}</Text>
+                      <Text tone="subdued" id='des'>
+                        {data.des}
+                      </Text>
+                      <Divider />
+                    </BlockStack>
+                    <Box paddingBlockStart={300}>
+                      <InlineStack align='end' gap={200}>
+                        <div id="view_banner" onClick={() => props.handleNoteData(data._id)}>
+                          <Banner hideIcon >
+                            <Icon
+                              source={ViewIcon}
+                              tone="success"
+                            />
+                          </Banner>
+                        </div>
+                        <div id="edit_banner" onClick={() => props.handleNoteData(data._id)}>
+                          <Banner hideIcon >
+                            <Icon
+                              source={EditIcon}
+                              tone="warning"
+                            />
+                          </Banner>
+                        </div>
+                        <div id="delete_banner" onClick={() => props.handleNoteData(data._id)}>
+                          <Banner hideIcon >
+                            <Icon
+                              source={DeleteIcon}
+                              tone="critical"
+                            />
+                          </Banner>
+                        </div>
+                      </InlineStack>
+                      <Box paddingBlockStart={300}>
+                        <Text alignment="end" tone="subdued" variant='bodySm'>{new Date(data.cdt).toLocaleString()}</Text>
+                      </Box>
+                    </Box>
+                  </Box>
+                </>
               )
             }) : ''}
           </InlineGrid>

@@ -6,3 +6,18 @@
 #des {
     overflow: hidden;
 }
+
+#view_banner .Polaris-Banner:hover {
+    cursor: pointer;
+    background-color: #cdfed4;
+}
+
+#edit_banner .Polaris-Banner:hover {
+    cursor: pointer;
+    background-color: #fff1e3;
+}
+
+#delete_banner .Polaris-Banner:hover {
+    cursor: pointer;
+    background-color: #fee8eb;
+}

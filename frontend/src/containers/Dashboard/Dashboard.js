@@ -58,6 +58,10 @@ const Dashboard = () => {
     }, 100)
   }
 
+  const handleNoteData = (data) => {
+    console.log("data", data)
+  }
+
   return (
     <div>
       <DashboardCard
@@ -66,6 +70,7 @@ const Dashboard = () => {
         openCloseModal={openCloseModal}
         handleAddNote={handleAddNote} //handle open add modal note
         handleSaveNote={handleSaveNote} //handle save note
+        handleNoteData={handleNoteData}
       />
     </div>
   )
