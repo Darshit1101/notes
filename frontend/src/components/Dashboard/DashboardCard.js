@@ -59,7 +59,7 @@ function DashboardCard(props) {
                             />
                           </Banner>
                         </div>
-                        <div id="delete_banner" onClick={() => props.handleNoteData(data._id)}>
+                        <div id="delete_banner" onClick={() => props.handledeleteCard(data._id)}>
                           <Banner hideIcon >
                             <Icon
                               source={DeleteIcon}

@@ -47,5 +47,27 @@ module.exports = {
             console.error('addNote===>', error);
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
         }
+    },
+
+    deleteCard: async (values) => {
+        try {
+            const { id } = values.query;
+
+            // Find and delete the note
+            const d = await modalForNote.deleteOne({ _id: id });     //0 or 1 based on success or failure(sucess=>1, failure=>0)
+            //or
+            // await modalForNote.findByIdAndDelete(id);             //Deletes a document by its _id and also returns the deleted document.      
+
+            return {
+                status: 200,
+                data: {
+                    status: 'success',
+                    m: 'Note deleted successfully',
+                },
+            };
+        } catch (error) {
+            console.log('deleteCard===>', error);
+            return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
+        }
     }
 }

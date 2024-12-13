@@ -9,5 +9,9 @@ module.exports = {
         const data = await service.getAllNotes(req);
         res.status(data.status).send(data.data);
     },
+    deleteCard: async (req, res) => {
+        const data = await service.deleteCard(req);
+        res.status(data.status).send(data.data);
+    },
 
 }

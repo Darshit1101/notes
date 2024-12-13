@@ -11,13 +11,15 @@ const dashboard = createSlice({
     getAllNoteSuccess: (state, action) => {
       return { ...state, getAll: action.payload };
     },
+    deleteCard: (state, action) => { },
   }
 });
 
 export const {
   addNote,
   getAllNote,
-  getAllNoteSuccess
+  getAllNoteSuccess,
+  deleteCard,
 } = dashboard.actions;
 
 export default dashboard.reducer;
