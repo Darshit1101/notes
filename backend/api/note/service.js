@@ -34,7 +34,7 @@ module.exports = {
             const { uid } = values.body
 
             // Fetch all notes from the database    
-            const notes = await modalForNote.find({ uid: uid });
+            const notes = await modalForNote.find({ uid: uid }).sort({ cdt: -1 });
 
             return {
                 status: 200,
