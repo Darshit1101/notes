@@ -17,8 +17,6 @@ function Header(props) {
     setState((prevState) => ({ ...prevState, ...obj }));
   }, []);
 
-  const [searchActive, setSearchActive] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const [userMenuActive, setUserMenuActive] = useState(false);
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
@@ -35,16 +33,6 @@ function Header(props) {
   useEffect(() => {
     changeNameValue({ profile: profile });
   }, [profile]);
-
-  const handleSearchResultsDismiss = useCallback(() => {
-    setSearchActive(false);
-    setSearchValue('');
-  }, []);
-
-  const handleSearchFieldChange = useCallback((value) => {
-    setSearchValue(value);
-    setSearchActive(value.length > 0);
-  }, []);
 
   const toggleUserMenuActive = useCallback(
     () => setUserMenuActive((userMenuActive) => !userMenuActive),
@@ -86,21 +74,10 @@ function Header(props) {
     />
   );
 
-  const searchFieldMarkup = (
-    <TopBar.SearchField
-      onChange={handleSearchFieldChange}
-      value={searchValue}
-      placeholder="Search"
-    />
-  );
-
   const topBarMarkup = (
     <TopBar
       showNavigationToggle
       userMenu={userMenuMarkup}
-      searchResultsVisible={searchActive}
-      searchField={searchFieldMarkup}
-      onSearchResultsDismiss={handleSearchResultsDismiss}
       onNavigationToggle={toggleMobileNavigationActive}
     />
   );
