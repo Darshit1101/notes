@@ -62,6 +62,7 @@ const Dashboard = () => {
     console.log("data", data)
   }
 
+  //delete note particular
   const handledeleteCard = (id) => {
     let obj = {
       id: id
@@ -70,6 +71,16 @@ const Dashboard = () => {
     setTimeout(() => {
       dispatch(dashboardDucks.getAllNote(objData));
     }, 100)
+  }
+
+  //view data on view btn click
+  const handleViewNote = (data) => {
+    console.log("data===>", data)
+  }
+
+  //edit btn onclick
+  const handleEditNoteData = (data) => {
+    console.log("edit data", data)
   }
 
   return (
@@ -82,6 +93,8 @@ const Dashboard = () => {
         handleSaveNote={handleSaveNote} //handle save note
         handleNoteData={handleNoteData}
         handledeleteCard={handledeleteCard}
+        handleViewNote={handleViewNote}
+        handleEditNoteData={handleEditNoteData}
       />
     </div>
   )

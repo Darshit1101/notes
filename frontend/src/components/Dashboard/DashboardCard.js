@@ -43,7 +43,7 @@ function DashboardCard(props) {
                     </BlockStack>
                     <Box paddingBlockStart={300}>
                       <InlineStack align='end' gap={200}>
-                        <div id="view_banner" onClick={() => props.handleNoteData(data._id)}>
+                        <div id="view_banner" onClick={() => props.handleViewNote(data)}>
                           <Banner hideIcon >
                             <Icon
                               source={ViewIcon}
@@ -51,7 +51,7 @@ function DashboardCard(props) {
                             />
                           </Banner>
                         </div>
-                        <div id="edit_banner" onClick={() => props.handleNoteData(data._id)}>
+                        <div id="edit_banner" onClick={() => props.handleEditNoteData(data)}>
                           <Banner hideIcon >
                             <Icon
                               source={EditIcon}
