@@ -1,23 +1,26 @@
 #Add {
-    background-color: #29845a;
-    color: white;
+  background-color: #29845a;
+  color: white;
 }
 
+#tit {
+  overflow: hidden;
+}
 #des {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 #view_banner .Polaris-Banner:hover {
-    cursor: pointer;
-    background-color: #cdfed4;
+  cursor: pointer;
+  background-color: #cdfed4;
 }
 
 #edit_banner .Polaris-Banner:hover {
-    cursor: pointer;
-    background-color: #fff1e3;
+  cursor: pointer;
+  background-color: #fff1e3;
 }
 
 #delete_banner .Polaris-Banner:hover {
-    cursor: pointer;
-    background-color: #fee8eb;
+  cursor: pointer;
+  background-color: #fee8eb;
 }

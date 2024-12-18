@@ -33,9 +33,11 @@ function DashboardCard(props) {
             {state.Allnotes && state.Allnotes.length > 0 ? state.Allnotes.map((data, index) => {
               return (
                 <>
-                  <Box background="bg-surface" borderRadius="200" borderColor="border" borderWidth="025" padding="400" key={index}>
+                  <Box height="300px" background="bg-surface" borderRadius="200" borderColor="border" borderWidth="025" padding="400" key={index}>
                     <BlockStack gap={100}>
-                      <Text variant='headingMd' as='p' fontWeight='semibold' id='des'> {data.tit}</Text>
+                      <Text variant='headingMd' as='p' fontWeight='semibold' id='tit'>
+                        {data.tit}
+                      </Text>
                       <Text tone="subdued" id='des'>
                         {data.des}
                       </Text>
@@ -148,6 +150,20 @@ function DashboardCard(props) {
           </InlineStack>
         </Modal.Section>
       </Modal>
+
+      {/* view data modal  */}
+      < Modal
+        open={state.viewNoteModal}
+        title={state.tit}
+        onClose={(e) => props.openCloseModal('viewNoteModal', state.viewNoteModal, e)}
+      >
+        <Modal.Section>
+          <Box paddingBlockEnd={0} paddingBlockStart={0}>
+            {state.des}
+          </Box>
+        </Modal.Section>
+      </Modal >
+
     </div>
   )
 }

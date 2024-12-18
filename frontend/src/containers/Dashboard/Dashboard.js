@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from 'react'
-// import { DashboardCard } from '../../components';
 import DashboardCard from "../../components/Dashboard/DashboardCard";
 import { useDispatch, useSelector } from "react-redux";
 import * as dashboardDucks from '../../ducks/dashboard';
@@ -12,7 +11,8 @@ const Dashboard = () => {
     addNoteModal: false,
     tit: '',//title
     des: '',//description
-    Allnotes: [] //all notes data
+    Allnotes: [],//all notes data
+    viewNoteModal: false
   })
 
   const changeNameValue = useCallback((obj) => {
@@ -41,6 +41,7 @@ const Dashboard = () => {
 
   //handle open add modal note
   const handleAddNote = () => {
+    clearState();
     openCloseModal('addNoteModal', state.addNoteModal, 'open');
   }
 
@@ -52,7 +53,7 @@ const Dashboard = () => {
       uid: localStorage.getItem('id')
     }
     dispatch(dashboardDucks.addNote(obj));
-    changeNameValue({ tit: '', des: '' });
+    clearState();
     openCloseModal('addNoteModal', state.addNoteModal, 'close');
     setTimeout(() => {
       dispatch(dashboardDucks.getAllNote(objData));
@@ -76,12 +77,26 @@ const Dashboard = () => {
 
   //view data on view btn click
   const handleViewNote = (data) => {
-    console.log("data===>", data)
+    let obj = {
+      tit: data.tit,
+      des: data.des,
+    }
+    changeNameValue(obj)
+    openCloseModal('viewNoteModal', state.viewNoteModal, 'open');
   }
 
   //edit btn onclick
   const handleEditNoteData = (data) => {
     console.log("edit data", data)
+  }
+
+  //clear state
+  const clearState = () => {
+    let obj = {
+      tit: "",
+      des: ""
+    }
+    changeNameValue(obj);
   }
 
   return (
