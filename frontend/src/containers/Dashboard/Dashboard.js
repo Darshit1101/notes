@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { DashboardCard } from '../../components';
+// import { DashboardCard } from '../../components';
+import DashboardCard from "../../components/Dashboard/DashboardCard";
 import { useDispatch, useSelector } from "react-redux";
 import * as dashboardDucks from '../../ducks/dashboard';
 import './Dashboard.css';

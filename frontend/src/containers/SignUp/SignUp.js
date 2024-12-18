@@ -1,4 +1,5 @@
-import { SignUpCard } from '../../components';
+// import { SignUpCard } from '../../components';
+import SignUpCard from "../../components/SignUp/SignUpCard";
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import * as loginDucks from '../../ducks/login';

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TestingCard } from '../../components';
+import TestingCard from "../../components/Testing/TestingCard";
 
 const Test = () => {
     return (

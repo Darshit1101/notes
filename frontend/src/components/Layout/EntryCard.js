@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeaderCard } from '..';
+import HeaderCard from '../Layout/Header';
 
 function EntryCard(props) {
   return (
