@@ -5,9 +5,12 @@
 
 #tit {
   overflow: hidden;
+  white-space: nowrap;
 }
+
 #des {
   overflow: hidden;
+  white-space: nowrap;
 }
 
 #view_banner .Polaris-Banner:hover {
