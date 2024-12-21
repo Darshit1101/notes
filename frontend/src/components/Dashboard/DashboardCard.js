@@ -3,7 +3,7 @@ import {
   Page, Card, Button, Icon, InlineStack, Box, Modal, TextField, InlineGrid, Text, EmptyState, SkeletonBodyText, SkeletonDisplayText,
   BlockStack, Banner, Divider
 } from '@shopify/polaris';
-import { PlusIcon, DeleteIcon, ViewIcon, EditIcon } from '@shopify/polaris-icons';
+import { PlusIcon, DeleteIcon, ViewIcon, EditIcon, SearchIcon } from '@shopify/polaris-icons';
 import { useSelector } from 'react-redux';
 
 function DashboardCard(props) {
@@ -15,17 +15,30 @@ function DashboardCard(props) {
       <Page
         title="Notes"
         subtitle="Your Digital Notebook"
-        primaryAction={<Button variant="primary" onClick={handleAddNote}>
-          <InlineStack blockAlign='center'>
-            <Box paddingInlineEnd={100}>
-              <Icon
-                source={PlusIcon}
-              />
-            </Box>
-            <span>Add notes</span>
+        primaryAction={
+          <InlineStack gap={200}>
+            <TextField
+              value={state.notesValue}
+              onChange={(e) => changeNameValue({ notesValue: e })}
+              autoComplete="off"
+              placeholder={'Search'}
+              suffix={<Icon
+                source={SearchIcon}
+                tone="base"
+              />}
+            />
+            <Button variant="primary" onClick={handleAddNote}>
+              <InlineStack blockAlign='center'>
+                <Box paddingInlineEnd={0}>
+                  <Icon
+                    source={PlusIcon}
+                  />
+                </Box>
+                <Text>Add notes</Text>
+              </InlineStack>
+            </Button>
           </InlineStack>
-        </Button>}
-
+        }
       >
         {state.Allnotes && state.Allnotes.length > 0 ?
 

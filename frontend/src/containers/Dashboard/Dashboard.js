@@ -12,7 +12,8 @@ const Dashboard = () => {
     tit: '',//title
     des: '',//description
     Allnotes: [],//all notes data
-    viewNoteModal: false
+    viewNoteModal: false,
+    notesValue: ''//search bar state value
   })
 
   const changeNameValue = useCallback((obj) => {
