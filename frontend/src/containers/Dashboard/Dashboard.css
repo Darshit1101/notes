@@ -27,3 +27,7 @@
   cursor: pointer;
   background-color: #fee8eb;
 }
+
+#search_feild {
+  width: 250px;
+}

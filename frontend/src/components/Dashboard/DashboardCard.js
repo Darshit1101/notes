@@ -13,7 +13,7 @@ function DashboardCard(props) {
   return (
     <div>
       <Page
-        title="Notes"
+        title="Notes"             
         subtitle="Your Digital Notebook"
         primaryAction={
           <InlineStack gap={200}>
@@ -22,6 +22,7 @@ function DashboardCard(props) {
               onChange={(e) => changeNameValue({ notesValue: e })}
               autoComplete="off"
               placeholder={'Search'}
+              id='search_feild'
               suffix={<Icon
                 source={SearchIcon}
                 tone="base"

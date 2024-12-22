@@ -100,6 +100,19 @@ const Dashboard = () => {
     changeNameValue(obj);
   }
 
+  //search notes
+  useEffect(() => {
+    if (state.notesValue !== '') {
+      let filterNote = getdataList.filter((elm) => {
+        return elm.tit.toLowerCase().includes(state.notesValue.toLowerCase()) || elm.des.toLowerCase().includes(state.notesValue.toLowerCase());
+      });
+      changeNameValue({ Allnotes: filterNote })
+    }
+    else {
+      changeNameValue({ Allnotes: getdataList });
+    }
+  }, [state.notesValue]);
+
   return (
     <div>
       <DashboardCard
