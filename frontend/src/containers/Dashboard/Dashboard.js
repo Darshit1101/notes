@@ -61,10 +61,6 @@ const Dashboard = () => {
     }, 100)
   }
 
-  const handleNoteData = (data) => {
-    console.log("data", data)
-  }
-
   //delete note particular
   const handledeleteCard = (id) => {
     let obj = {
@@ -121,10 +117,9 @@ const Dashboard = () => {
         openCloseModal={openCloseModal}
         handleAddNote={handleAddNote} //handle open add modal note
         handleSaveNote={handleSaveNote} //handle save note
-        handleNoteData={handleNoteData}
-        handledeleteCard={handledeleteCard}
-        handleViewNote={handleViewNote}
-        handleEditNoteData={handleEditNoteData}
+        handledeleteCard={handledeleteCard}//delete note 
+        handleViewNote={handleViewNote}//view note
+        handleEditNoteData={handleEditNoteData}//edit note
       />
     </div>
   )
