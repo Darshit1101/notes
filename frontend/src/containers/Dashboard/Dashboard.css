@@ -31,3 +31,7 @@
 #search_feild {
   width: 250px;
 }
+
+.searchBar .Polaris-TextField {
+  height: 28px;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   Page, Card, Button, Icon, InlineStack, Box, Modal, TextField, InlineGrid, Text, EmptyState, SkeletonBodyText, SkeletonDisplayText,
-  BlockStack, Banner, Divider
+  BlockStack, Banner, Divider, ActionList, Popover, ButtonGroup
 } from '@shopify/polaris';
 import { PlusIcon, DeleteIcon, ViewIcon, EditIcon, SearchIcon } from '@shopify/polaris-icons';
 import { useSelector } from 'react-redux';
@@ -10,34 +10,57 @@ function DashboardCard(props) {
   const { state, changeNameValue, handleAddNote } = props;
   const isLoading = useSelector(state => state.loading.isLoading);
 
+  const handleCategorySelection = (label, value) => {
+    const newCategory = label === 'All' ? '' : label;
+    changeNameValue({ popoverActive: false, Category: newCategory });
+  };
+
   return (
     <div>
       <Page
-        title="Notes"             
+        title="Notes"
         subtitle="Your Digital Notebook"
         primaryAction={
           <InlineStack gap={200}>
-            <TextField
-              value={state.notesValue}
-              onChange={(e) => changeNameValue({ notesValue: e })}
-              autoComplete="off"
-              placeholder={'Search'}
-              id='search_feild'
-              suffix={<Icon
-                source={SearchIcon}
-                tone="base"
-              />}
-            />
-            <Button variant="primary" onClick={handleAddNote}>
-              <InlineStack blockAlign='center'>
-                <Box paddingInlineEnd={0}>
-                  <Icon
-                    source={PlusIcon}
-                  />
-                </Box>
+            <ButtonGroup>
+              <Popover
+                active={state.popoverActive}
+                activator={<Button variant="tertiary" onClick={() => changeNameValue({ popoverActive: !state.popoverActive })} disclosure>
+                  {state.Category || "Select category"}
+                </Button>}
+                onClose={() => changeNameValue({ popoverActive: false })}
+              >
+                <ActionList
+                  // actionRole="menuitem"
+                  items={[
+                    { content: 'All', onAction: () => handleCategorySelection('All', 'all') },
+                    { content: 'Personal', onAction: () => handleCategorySelection('Personal', 'personal') },
+                    { content: 'Shopping', onAction: () => handleCategorySelection('Shopping', 'shopping') },
+                    { content: 'Health', onAction: () => handleCategorySelection('Health', 'health') },
+                    { content: 'Travel', onAction: () => handleCategorySelection('Travel', 'travel') },
+                    { content: 'Education', onAction: () => handleCategorySelection('Education', 'education') },
+                    { content: 'Finance', onAction: () => handleCategorySelection('Finance', 'finance') },
+                    { content: 'Hobbies', onAction: () => handleCategorySelection('Hobbies', 'hobbies') },
+                  ]}
+                />
+              </Popover>
+              <div className="searchBar">
+                <TextField
+                  value={state.notesValue}
+                  onChange={(e) => changeNameValue({ notesValue: e })}
+                  autoComplete="off"
+                  placeholder={'Search'}
+                  id='search_feild'
+                  suffix={<Icon
+                    source={SearchIcon}
+                    tone="base"
+                  />}
+                />
+              </div>
+              <Button icon={PlusIcon} variant="primary" onClick={handleAddNote}>
                 <Text>Add notes</Text>
-              </InlineStack>
-            </Button>
+              </Button>
+            </ButtonGroup>
           </InlineStack>
         }
       >
@@ -85,7 +108,18 @@ function DashboardCard(props) {
                         </div>
                       </InlineStack>
                       <Box paddingBlockStart={300}>
-                        <Text alignment="end" tone="subdued" variant='bodySm'>{new Date(data.cdt).toLocaleString()}</Text>
+                        <Text alignment="end" tone="subdued" variant='bodySm'>
+                          {new Date(data.cdt).toLocaleString('en-GB', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: true
+                          }).replace(/(am|pm)/gi, (match) => match.toUpperCase())}
+                        </Text>
+                        {/* <Text alignment="end" tone="subdued" variant='bodySm'>{new Date(data.cdt).toLocaleString()}</Text> */}
                       </Box>
                     </Box>
                   </Box>
