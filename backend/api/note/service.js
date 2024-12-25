@@ -1,14 +1,14 @@
 module.exports = {
     addNote: async (values) => {
         try {
-            const { tit, des, uid, tag } = values.body;
+            const { tit, des, uid, ctr } = values.body;
 
             // Create a new note instance
             const newNote = new modalForNote({
                 tit: tit,
                 des: des,
                 uid: uid,
-                tag: tag,
+                ctr: ctr,
                 cdt: new Date(),
                 upd: new Date(),
             });

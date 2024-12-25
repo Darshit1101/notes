@@ -13,6 +13,9 @@ var model = new Schema({
     tag: { // Tag
         type: String,
     },
+    ctr: {//Category
+        type: String,
+    },
     cdt: { //Create date
         type: Date,
     },
