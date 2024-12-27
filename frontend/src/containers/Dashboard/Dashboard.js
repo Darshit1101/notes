@@ -54,6 +54,7 @@ const Dashboard = () => {
     let obj = {
       tit: state.tit,
       des: state.des,
+      ctr: state.selectedCategory,
       uid: localStorage.getItem('id')
     }
     dispatch(dashboardDucks.addNote(obj));
@@ -94,7 +95,8 @@ const Dashboard = () => {
   const clearState = () => {
     let obj = {
       tit: "",
-      des: ""
+      des: "",
+      selectedCategory: 'all'
     }
     changeNameValue(obj);
   }
