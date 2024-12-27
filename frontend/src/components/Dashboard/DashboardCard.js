@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import {
   Page, Card, Button, Icon, InlineStack, Box, Modal, TextField, InlineGrid, Text, EmptyState, SkeletonBodyText, SkeletonDisplayText,
-  BlockStack, Banner, Divider, ActionList, Popover, ButtonGroup
+  BlockStack, Banner, Divider, ActionList, Popover, ButtonGroup, Select
 } from '@shopify/polaris';
 import { PlusIcon, DeleteIcon, ViewIcon, EditIcon, SearchIcon } from '@shopify/polaris-icons';
 import { useSelector } from 'react-redux';
@@ -14,6 +14,28 @@ function DashboardCard(props) {
     const newCategory = label === 'All' ? '' : label;
     changeNameValue({ popoverActive: false, Category: newCategory });
   };
+
+  const options = [
+    { label: 'All', value: 'all' },
+    { label: 'Personal', value: 'personal' },
+    { label: 'Shopping', value: 'shopping' },
+    { label: 'Health', value: 'health' },
+    { label: 'Shopping', value: 'shopping' },
+    { label: 'Travel', value: 'travel' },
+    { label: 'Education', value: 'education' },
+    { label: 'Hobbies', value: 'hobbies' },
+  ];
+
+  const selectCategory = [
+    { content: 'All', onAction: () => handleCategorySelection('All', 'all') },
+    { content: 'Personal', onAction: () => handleCategorySelection('Personal', 'personal') },
+    { content: 'Shopping', onAction: () => handleCategorySelection('Shopping', 'shopping') },
+    { content: 'Health', onAction: () => handleCategorySelection('Health', 'health') },
+    { content: 'Travel', onAction: () => handleCategorySelection('Travel', 'travel') },
+    { content: 'Education', onAction: () => handleCategorySelection('Education', 'education') },
+    { content: 'Finance', onAction: () => handleCategorySelection('Finance', 'finance') },
+    { content: 'Hobbies', onAction: () => handleCategorySelection('Hobbies', 'hobbies') },
+  ]
 
   return (
     <div>
@@ -32,16 +54,7 @@ function DashboardCard(props) {
               >
                 <ActionList
                   // actionRole="menuitem"
-                  items={[
-                    { content: 'All', onAction: () => handleCategorySelection('All', 'all') },
-                    { content: 'Personal', onAction: () => handleCategorySelection('Personal', 'personal') },
-                    { content: 'Shopping', onAction: () => handleCategorySelection('Shopping', 'shopping') },
-                    { content: 'Health', onAction: () => handleCategorySelection('Health', 'health') },
-                    { content: 'Travel', onAction: () => handleCategorySelection('Travel', 'travel') },
-                    { content: 'Education', onAction: () => handleCategorySelection('Education', 'education') },
-                    { content: 'Finance', onAction: () => handleCategorySelection('Finance', 'finance') },
-                    { content: 'Hobbies', onAction: () => handleCategorySelection('Hobbies', 'hobbies') },
-                  ]}
+                  items={selectCategory}
                 />
               </Popover>
               <div className="searchBar">
@@ -187,6 +200,14 @@ function DashboardCard(props) {
               value={state.des}
               onChange={(e) => changeNameValue({ des: e })}
               autoComplete="off"
+            />
+          </Box>
+          <Box paddingBlockEnd={200}>
+            <Select
+              label="Category"
+              options={options}
+              onChange={(e) => changeNameValue({ selectedCategory: e })}
+              value={state.selectedCategory}
             />
           </Box>
           <InlineStack align='start'>

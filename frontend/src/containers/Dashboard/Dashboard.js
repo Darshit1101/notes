@@ -15,7 +15,8 @@ const Dashboard = () => {
     viewNoteModal: false,
     notesValue: '',//search bar state value
     popoverActive: false,
-    Category: ''
+    Category: '',
+    selectedCategory: 'all'
   })
 
   const changeNameValue = useCallback((obj) => {
