@@ -10,7 +10,7 @@ module.exports = {
             await newNote.save();
 
             //get all notes
-            const notes = await getNotesByUserId(uid);
+            const notes = await getNotesByUserId({ uid });
 
             return ({
                 status: 200,
@@ -28,15 +28,7 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
-            const { uid, ctr } = values.body
-
-            const query = { uid }; // Start with filtering by user ID (Default)
-            if (ctr) {
-                query.ctr = ctr; // Add category filter if provided
-            }
-
-            // Fetch all notes from the database or category wise    
-            const notes = await modalForNote.find(query).sort({ cdt: -1 });
+            const notes = await getNotesByUserId(values.body);
 
             return {
                 status: 200,
@@ -60,7 +52,7 @@ module.exports = {
             // await modalForNote.findByIdAndDelete(id);   //Deletes a document by its _id and also returns the deleted document.      
 
             // Fetch all notes from the database
-            const notes = await getNotesByUserId(uid);
+            const notes = await getNotesByUserId({ uid });
 
             return {
                 status: 200,
@@ -82,7 +74,7 @@ module.exports = {
             await modalForNote.findByIdAndUpdate(nid, { tit, des, ctr, upd: new Date() });
 
             // Fetch all notes from the database
-            const notes = await getNotesByUserId(uid);
+            const notes = await getNotesByUserId({ uid });
 
             return {
                 status: 200,
@@ -100,6 +92,13 @@ module.exports = {
     }
 }
 
-const getNotesByUserId = async (uid) => {
-    return await modalForNote.find({ uid }).sort({ cdt: -1 });
+const getNotesByUserId = async (values) => {
+    const { uid, ctr } = values;  // Deconstruct values
+
+    const query = { uid };
+    if (ctr) {
+        query.ctr = ctr;  // Filter by category if provided
+    }
+
+    return await modalForNote.find(query).sort({ cdt: -1 });
 };
