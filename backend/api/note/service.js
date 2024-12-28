@@ -31,10 +31,15 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
-            const { uid } = values.body
+            const { uid, ctr } = values.body
 
-            // Fetch all notes from the database    
-            const notes = await modalForNote.find({ uid: uid }).sort({ cdt: -1 });
+            const query = { uid }; // Start with filtering by user ID (Default)
+            if (ctr) {
+                query.ctr = ctr; // Add category filter if provided
+            }
+
+            // Fetch all notes from the database or category wise    
+            const notes = await modalForNote.find(query).sort({ cdt: -1 });
 
             return {
                 status: 200,
