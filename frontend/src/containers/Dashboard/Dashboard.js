@@ -114,6 +114,18 @@ const Dashboard = () => {
     }
   }, [state.notesValue]);
 
+  const handleCategorySelection = (label, value) => {
+    const newCategory = label === 'All' ? '' : label;
+    changeNameValue({ popoverActive: false, Category: newCategory });
+    // Conditionally manage the `ctr` property in objData
+    if (value === 'all') {
+      delete objData.ctr; // Remove `ctr` for default API call
+    } else {
+      objData.ctr = value; // Add `ctr` for filtering
+    }
+    dispatch(dashboardDucks.getAllNote(objData));
+  };
+
   return (
     <div>
       <DashboardCard
@@ -125,6 +137,7 @@ const Dashboard = () => {
         handledeleteCard={handledeleteCard}//delete note 
         handleViewNote={handleViewNote}//view note
         handleEditNoteData={handleEditNoteData}//edit note
+        handleCategorySelection={handleCategorySelection}//category wise selection
       />
     </div>
   )

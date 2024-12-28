@@ -7,13 +7,8 @@ import { PlusIcon, DeleteIcon, ViewIcon, EditIcon, SearchIcon } from '@shopify/p
 import { useSelector } from 'react-redux';
 
 function DashboardCard(props) {
-  const { state, changeNameValue, handleAddNote } = props;
+  const { state, changeNameValue, handleAddNote, handleCategorySelection } = props;
   const isLoading = useSelector(state => state.loading.isLoading);
-
-  const handleCategorySelection = (label, value) => {
-    const newCategory = label === 'All' ? '' : label;
-    changeNameValue({ popoverActive: false, Category: newCategory });
-  };
 
   const options = [
     { label: 'All', value: 'all' },
