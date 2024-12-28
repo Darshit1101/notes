@@ -12,6 +12,7 @@ const dashboard = createSlice({
       return { ...state, getAll: action.payload };
     },
     deleteCard: (state, action) => { },
+    editNote: (state, action) => { },
   }
 });
 
@@ -20,6 +21,7 @@ export const {
   getAllNote,
   getAllNoteSuccess,
   deleteCard,
+  editNote,
 } = dashboard.actions;
 
 export default dashboard.reducer;

@@ -9,6 +9,7 @@ function* addNote(action) {
     yield put(load());
     const res = yield call(api.POST, '/addnote', action.payload);
     if (res.status === 'success') {
+      yield put(actions.getAllNoteSuccess(res.data));
       yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {
@@ -41,8 +42,27 @@ function* getAllNote(action) {
 function* deleteCard(action) {
   try {
     yield put(load());
-    const res = yield call(api.DELETE, '/deleteCard?id=' + action.payload.id);
+    const res = yield call(api.DELETE, '/deleteCard?id=' + action.payload.id + '&uid=' + action.payload.uid);
     if (res.status === 'success') {
+      yield put(actions.getAllNoteSuccess(res.data));
+      yield put(toastify({ type: 'success', msg: res.m }));
+    }
+    else {
+      yield put(toastify({ type: 'error', msg: res.m }));
+    }
+    yield put(loaded());
+  } catch (error) {
+    yield put(loaded());
+    yield put(toastify({ type: 'error', msg: 'Something went wrong while doing. Please try again.' }));
+  }
+}
+
+function* editNote(action) {
+  try {
+    yield put(load());
+    const res = yield call(api.POST, '/editNote', action.payload);
+    if (res.status === 'success') {
+      yield put(actions.getAllNoteSuccess(res.data));
       yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {
@@ -59,6 +79,7 @@ export function* watchGetDashboard() {
   yield takeLatest(actions.addNote.type, addNote);
   yield takeLatest(actions.getAllNote.type, getAllNote);
   yield takeLatest(actions.deleteCard.type, deleteCard);
+  yield takeLatest(actions.editNote.type, editNote);
 }
 
 export default function* rootSaga() {

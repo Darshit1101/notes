@@ -228,6 +228,48 @@ function DashboardCard(props) {
         </Modal.Section>
       </Modal >
 
+      {/* edit data modal  */}
+      < Modal
+        open={state.editNoteModal}
+        title={"Update note detail"}
+        onClose={(e) => props.openCloseModal('editNoteModal', state.editNoteModal, e)}
+      >
+        <Modal.Section>
+          <TextField
+            label="Title"
+            placeholder='Enter title'
+            value={state.tit}
+            onChange={(e) => changeNameValue({ tit: e })}
+            autoComplete="off"
+          />
+          <Box paddingBlockStart={200} paddingBlockEnd={200}>
+            <TextField
+              label="Description"
+              placeholder='Enter description'
+              multiline={4}
+              value={state.des}
+              onChange={(e) => changeNameValue({ des: e })}
+              autoComplete="off"
+            />
+          </Box>
+          <Box paddingBlockEnd={200}>
+            <Select
+              label="Category"
+              options={options}
+              onChange={(e) => changeNameValue({ selectedCategory: e })}
+              value={state.selectedCategory}
+            />
+          </Box>
+          <InlineStack align='start'>
+            <Box paddingBlockEnd={100} paddingBlockStart={200}>
+              <Button size="large" id='Add' onClick={() => {
+                props.handleUpdateNote();
+              }}>Update</Button>
+            </Box>
+          </InlineStack>
+        </Modal.Section>
+      </Modal >
+
     </div>
   )
 }

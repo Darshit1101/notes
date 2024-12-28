@@ -13,6 +13,7 @@ const Dashboard = () => {
     des: '',//description
     Allnotes: [],//all notes data
     viewNoteModal: false,
+    editNoteModal: false,
     notesValue: '',//search bar state value
     popoverActive: false,
     Category: '',
@@ -60,20 +61,15 @@ const Dashboard = () => {
     dispatch(dashboardDucks.addNote(obj));
     clearState();
     openCloseModal('addNoteModal', state.addNoteModal, 'close');
-    setTimeout(() => {
-      dispatch(dashboardDucks.getAllNote(objData));
-    }, 100)
   }
 
   //delete note particular
   const handledeleteCard = (id) => {
     let obj = {
-      id: id
+      id: id,
+      uid: localStorage.getItem('id')
     }
     dispatch(dashboardDucks.deleteCard(obj))
-    setTimeout(() => {
-      dispatch(dashboardDucks.getAllNote(objData));
-    }, 100)
   }
 
   //view data on view btn click
@@ -88,7 +84,26 @@ const Dashboard = () => {
 
   //edit btn onclick
   const handleEditNoteData = (data) => {
-    console.log("edit data", data)
+    let obj = {
+      tit: data.tit,
+      des: data.des,
+      selectedCategory: data.ctr,
+      nid: data._id,
+    }
+    changeNameValue(obj)
+    openCloseModal('editNoteModal', state.editNoteModal, 'open');
+  }
+
+  const handleUpdateNote = () => {
+    let obj = {
+      tit: state.tit,
+      des: state.des,
+      ctr: state.selectedCategory,
+      nid: state.nid,
+      uid: localStorage.getItem('id')
+    }
+    dispatch(dashboardDucks.editNote(obj))
+    openCloseModal('editNoteModal', state.editNoteModal, 'close');
   }
 
   //clear state
@@ -96,7 +111,8 @@ const Dashboard = () => {
     let obj = {
       tit: "",
       des: "",
-      selectedCategory: 'all'
+      selectedCategory: 'all',
+      Category: ''
     }
     changeNameValue(obj);
   }
@@ -114,6 +130,7 @@ const Dashboard = () => {
     }
   }, [state.notesValue]);
 
+  //category wise data show
   const handleCategorySelection = (label, value) => {
     const newCategory = label === 'All' ? '' : label;
     changeNameValue({ popoverActive: false, Category: newCategory });
@@ -133,10 +150,11 @@ const Dashboard = () => {
         changeNameValue={changeNameValue}
         openCloseModal={openCloseModal}
         handleAddNote={handleAddNote} //handle open add modal note
-        handleSaveNote={handleSaveNote} //handle save note
+        handleSaveNote={handleSaveNote} //handle save note(Add note)
         handledeleteCard={handledeleteCard}//delete note 
         handleViewNote={handleViewNote}//view note
         handleEditNoteData={handleEditNoteData}//edit note
+        handleUpdateNote={handleUpdateNote}//update note
         handleCategorySelection={handleCategorySelection}//category wise selection
       />
     </div>
