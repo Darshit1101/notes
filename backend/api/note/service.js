@@ -101,5 +101,6 @@ module.exports = {
 }
 
 const getNotesByUserId = async (uid) => {
+    console.log("ok")
     return await modalForNote.find({ uid }).sort({ cdt: -1 });
 };
