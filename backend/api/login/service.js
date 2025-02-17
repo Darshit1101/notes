@@ -1,4 +1,5 @@
 const passwordService = require('../../service/passwordService')
+const uniqid = require('uniqid');
 
 module.exports = {
     createRegister: async (values) => {
@@ -16,6 +17,11 @@ module.exports = {
                 registerObj.pd = await passwordService.createHashPwd(registerObj.pd); // Hash the password
             }
 
+            // Generate a unique tracking id
+            if (registerObj) {
+                registerObj.ti = uniqid();
+            }
+
             let registerData = new modalForLogin(registerObj); // Create a new user document
             await registerData.save(); // Save the user to the database
 
@@ -30,7 +36,8 @@ module.exports = {
                         t: token,
                         e: registerData.e.toLowerCase(),
                         fn: registerData.fn,
-                        id: registerData._id
+                        id: registerData._id,
+                        ti: registerData.ti
                     }
                 }
             });

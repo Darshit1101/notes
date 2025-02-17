@@ -7,7 +7,10 @@ var model = new Schema({
     },
     pd: { // Password
         type: String,
-    }
+    },
+    ti: {//tracking id
+        type: String
+    },
 });
 
 module.exports = connection.model('login', model, 'login');
