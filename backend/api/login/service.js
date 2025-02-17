@@ -64,7 +64,7 @@ module.exports = {
             }
 
             // Generate JWT token
-            const token = jwt.sign({ id: user._id, email: user.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
+            const token = jwt.sign({ ti: user.ti, id: user._id, email: user.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
 
             return ({
                 status: 200,
@@ -75,6 +75,7 @@ module.exports = {
                         e: user.e.toLowerCase(),
                         fn: user.fn,
                         id: user._id,
+                        ti: user.ti
                     }
                 }
             });
