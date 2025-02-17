@@ -2,6 +2,7 @@ module.exports = {
     addNote: async (values) => {
         try {
             const { tit, des, uid, ctr } = values.body;
+            // console.log('decoded', values.decoded)
 
             // Create a new note instance
             const newNote = new modalForNote({ tit, des, uid, ctr, cdt: new Date(), upd: new Date() });
