@@ -26,7 +26,7 @@ module.exports = {
             await registerData.save(); // Save the user to the database
 
             // Generate JWT token
-            const token = jwt.sign({ id: registerData._id, email: registerData.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
+            const token = jwt.sign({ ti: registerObj.ti, id: registerData._id, email: registerData.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
 
             return ({
                 status: 200,
