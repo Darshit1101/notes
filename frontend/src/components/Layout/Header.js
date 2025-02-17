@@ -52,6 +52,7 @@ function Header(props) {
     localStorage.removeItem('username');
     localStorage.removeItem('email');
     localStorage.removeItem('id');
+    localStorage.removeItem('ti');
     window.location.href = '/login';
   }
 
