@@ -8,5 +8,6 @@
   "DATA_UPDATE_SUCCESS": "Data updated successfully.",
   "DATA_DELETE_SUCCESS": "Data deleted successfully.",
   "STATUS_UPDATE_SUCCESS": "Status updated successfully",
-  "EMAIL_ALREADY_REGISTERED": "Email already registered"
+  "EMAIL_ALREADY_REGISTERED": "Email already registered",
+  "UNAUTHORIZE": "Unauthorized access"
 }
