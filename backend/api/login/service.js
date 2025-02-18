@@ -25,8 +25,8 @@ module.exports = {
             let registerData = new modalForLogin(registerObj); // Create a new user document
             await registerData.save(); // Save the user to the database
 
-            // Generate JWT token
-            const token = jwt.sign({ ti: registerData.ti, id: registerData._id, email: registerData.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
+            //create auth token
+            let token = await createAuthToken(registerData);
 
             return ({
                 status: 200,
@@ -63,8 +63,8 @@ module.exports = {
                 return { status: 401, data: { status: 'error', m: msgObj.INVALID_CREDENTIALS } };
             }
 
-            // Generate JWT token
-            const token = jwt.sign({ ti: user.ti, id: user._id, email: user.e }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE_TIME });
+            //create auth token
+            let token = await createAuthToken(user);
 
             return ({
                 status: 200,
