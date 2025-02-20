@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';//redux
 import en from '@shopify/polaris/locales/en.json';//shopify polaris
 import { AppProvider } from '@shopify/polaris';//shopify polaris
 import '@shopify/polaris/build/esm/styles.css';//shopify polaris
-// import { Toastify, EntryCard } from './components';
 import EntryCard from './components/Layout/EntryCard';
 import Toastify from './components/Util/Toastify';
 
