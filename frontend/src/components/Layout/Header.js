@@ -5,6 +5,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { notes_logo } from '../../img';
 import * as authDucks from '../../ducks/auth';
+import { ExitIcon } from '@shopify/polaris-icons';
 
 function Header(props) {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function Header(props) {
   const userMenuActions = [{
     items: [
       {
+        icon: ExitIcon,
         content: 'Log out',
         onAction: () => handleLogout()
       }
