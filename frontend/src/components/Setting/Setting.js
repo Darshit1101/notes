@@ -13,7 +13,7 @@ function Setting() {
     {
       key: 1,
       label: 'Profile',
-      description: `Update profile icon, change password`,
+      description: `Delete account, change password`,
       image: ProfileIcon,
       url: '/setting/myprofile',
       ctaName: 'Update',
