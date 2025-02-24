@@ -84,4 +84,29 @@ module.exports = {
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
         }
     },
+
+    deleteAccount: async (values) => {
+        const { ti } = values.decoded;
+
+        //delete account function
+        deleteAccountFunction(ti)
+
+        return ({ status: 200, data: { status: "success" } });
+    },
+}
+
+
+// delete account function
+const deleteAccountFunction = async function (ti) {
+    try {
+
+        //delete user from login collection
+        await modalForLogin.deleteOne({ ti: ti });
+
+        //delete user note collection
+        // await modalForNote.deleteMany({ ti: ti });
+
+    } catch (e) {
+        console.log('account===delete====error===>', JSON.stringify(e));
+    }
 }
