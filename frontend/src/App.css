@@ -1,3 +1,4 @@
+
 #link_login_register {
   color: #007bff;
   cursor: pointer;
@@ -21,4 +22,21 @@
 
 .Polaris-Button--variantTertiary {
   background: var(--pc-button-bg_hover) !important;
+}
+
+/* on show new screen after one, set effect */
+.sidebar-animie {
+  animation: sidebarEffect 0.3s ease-in-out;
+}
+
+@keyframes sidebarEffect {
+  from {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
 }
