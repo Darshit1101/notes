@@ -4,6 +4,7 @@ import login from './login';
 import auth from './auth';
 import dashboard from "./dashboard";
 import loading from "./loading";
+import myprofile from './myprofile';
 
 const rootReducer = combineReducers({
     toast,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     auth,
     dashboard,
     loading,
+    myprofile
 });
 
 export default rootReducer;
