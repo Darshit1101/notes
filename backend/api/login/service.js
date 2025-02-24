@@ -103,8 +103,8 @@ const deleteAccountFunction = async function (ti) {
         //delete user from login collection
         await modalForLogin.deleteOne({ ti: ti });
 
-        //delete user note collection
-        // await modalForNote.deleteMany({ ti: ti });
+        //delete user note from note collection
+        await modalForNote.deleteMany({ ti: ti });
 
     } catch (e) {
         console.log('account===delete====error===>', JSON.stringify(e));

@@ -21,7 +21,10 @@ var model = new Schema({
     },
     upd: {//Update date
         type: Date
-    }
+    },
+    ti: {//tracking id
+        type: String
+    },
 });
 
 module.exports = connection.model('note', model, 'note');

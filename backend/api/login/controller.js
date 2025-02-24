@@ -10,6 +10,7 @@ module.exports = {
         const data = await service.createLogin(req);
         res.status(data.status).send(data.data);
     },
+
     deleteAccount: async (req, res) => {
         const data = await service.deleteAccount(req);
         res.status(data.status).send(data.data);
