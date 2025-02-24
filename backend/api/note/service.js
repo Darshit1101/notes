@@ -5,7 +5,7 @@ module.exports = {
             const { tit, des, uid, ctr } = values.body;
 
             // Create a new note instance
-            const newNote = new modalForNote({ tit, des, uid, ctr, cdt: new Date(), upd: new Date(), ti: ti });
+            const newNote = new modalForNote({ tit, des, uid, ctr, cdt: new Date(), upd: new Date(), ti });
 
             // Save the new note to the database
             await newNote.save();
