@@ -86,7 +86,7 @@ module.exports = {
     },
 
     deleteAccount: async (values) => {
-        const { ti } = values.decoded;
+        let { ti } = values.decoded;
 
         //delete account function
         deleteAccountFunction(ti)
@@ -95,6 +95,7 @@ module.exports = {
     },
 }
 
+// =================================================================================================================================================================
 
 // delete account function
 const deleteAccountFunction = async function (ti) {
