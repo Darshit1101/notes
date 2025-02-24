@@ -20,7 +20,8 @@ function Myprofile(props) {
 
     // handle back to main
     const handleBackToMain = () => {
-        navigate('/setting');
+        // Goes back one step in history
+        navigate(-1); // navigate('/setting');
     }
 
     // handle delete account
