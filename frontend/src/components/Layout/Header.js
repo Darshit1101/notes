@@ -5,9 +5,11 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { notes_logo } from '../../img';
 import * as authDucks from '../../ducks/auth';
-import { ExitIcon } from '@shopify/polaris-icons';
+import { ExitIcon, ProfileIcon } from '@shopify/polaris-icons';
+import { useNavigate } from "react-router";
 
 function Header(props) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [state, setState] = useState({
     profile: {}
@@ -59,6 +61,7 @@ function Header(props) {
 
   const userMenuActions = [{
     items: [
+      { content: 'Your profile', icon: ProfileIcon, onAction: () => navigate('/setting/myprofile') },
       {
         icon: ExitIcon,
         content: 'Log out',
