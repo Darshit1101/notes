@@ -15,6 +15,8 @@ function Sidebar() {
     <div>
       <Navigation location="/">
         <Navigation.Section
+        fill
+
           items={[
             {
               label: 'Dashboard',
