@@ -9,5 +9,7 @@
   "DATA_DELETE_SUCCESS": "Data deleted successfully.",
   "STATUS_UPDATE_SUCCESS": "Status updated successfully",
   "EMAIL_ALREADY_REGISTERED": "Email already registered",
-  "UNAUTHORIZE": "Unauthorized access"
+  "UNAUTHORIZE": "Unauthorized access",
+  "USER_NOT_FOUND": "There is no user available.",
+  "PWD_NOT_MATCH": "Current password couldn't match."
 }

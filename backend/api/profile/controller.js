@@ -5,4 +5,9 @@ module.exports = {
     const data = await profileService.getProfile(req);
     res.status(data.status).send(data.data);
   },
+  
+  cPwd: async (req, res) => {
+    const data = await profileService.cPwd(req);
+    res.status(data.status).send(data.data);
+  },
 }

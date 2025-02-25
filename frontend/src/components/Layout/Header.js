@@ -28,8 +28,7 @@ function Header(props) {
 
   //get profile data api call
   useEffect(() => {
-    let userId = localStorage.getItem('id');
-    dispatch(authDucks.getProfile(userId));
+    dispatch(authDucks.getProfile());
   }, []);
 
   //set profile data in state

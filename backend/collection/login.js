@@ -11,6 +11,12 @@ var model = new Schema({
     ti: {//tracking id
         type: String
     },
+    pver: {//password version
+        type: Number
+    },
+    udt: {//update date
+        type: Date
+    },
 });
 
 module.exports = connection.model('login', model, 'login');

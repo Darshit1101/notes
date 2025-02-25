@@ -8,7 +8,7 @@ import { toastify } from '../ducks/toast';
 function* getProfile(action) {
   try {
     // yield put(load());
-    const res = yield call(api.GET, "/getProfile?id=" + action.payload);
+    const res = yield call(api.GET, "/getProfile", action.payload);
     if (res.status === "success") {
       yield put(actions.getProfileSuccess(res.data));
     } else {

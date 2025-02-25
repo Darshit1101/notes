@@ -26,7 +26,6 @@ function* deleteAccount(action) {
 }
 
 function* cPwd(action) {
-    console.log(action, '====action');
     try {
         yield put(load());
         const res = yield call(api.POST, '/cPwd', action.payload);
