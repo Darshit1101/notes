@@ -7,7 +7,6 @@ const Setting = () => {
 
   return (
     <SettingCard
-
     />
   );
 }
