@@ -20,6 +20,7 @@ function Setting() {
     },
   ]
 
+  // handle redirect to the respective page
   const handleRedirectShp = (path) => {
     navigate(path);
   }
