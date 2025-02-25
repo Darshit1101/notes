@@ -1,0 +1,15 @@
+.loading-wrap {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 101%;
+  z-index: 1111;
+  align-items: center;
+  justify-content: center;
+  background: rgb(250 250 249 / 50%);
+  position: fixed;
+}
+.spinner_loading_main_div{
+  position: absolute;
+  z-index: 999;
+}

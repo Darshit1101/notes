@@ -8,6 +8,7 @@ import { AppProvider } from '@shopify/polaris';//shopify polaris
 import '@shopify/polaris/build/esm/styles.css';//shopify polaris
 import EntryCard from './components/Layout/EntryCard';
 import Toastify from './components/Util/Toastify';
+import Spinner from './components/Spinner/Spinner';
 
 let authToken = localStorage.getItem('authToken');
 
@@ -15,6 +16,7 @@ function App(props) {
   return (
     <Provider store={store}>
       <AppProvider i18n={en}>
+        <Spinner />
         <Toastify />
         <BrowserRouter>
           {
