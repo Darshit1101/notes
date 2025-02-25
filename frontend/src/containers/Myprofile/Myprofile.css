@@ -17,3 +17,14 @@
 #profileBox-bottom-space {
   margin-bottom: 20px;
 }
+
+.divCpass {
+  position: relative;
+}
+
+.divCpass .Polaris-Button {
+  position: absolute;
+  top: 30px;
+  right: 5px;
+  z-index: 99;
+}

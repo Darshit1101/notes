@@ -7,11 +7,14 @@ const myprofile = createSlice({
     initialState,
     reducers: {
         deleteAccount: (state, action) => { },
+        cPwd: (state, action) => { },
+
     }
 });
 
 export const {
-    deleteAccount
+    deleteAccount,
+    cPwd
 } = myprofile.actions;
 
 export default myprofile.reducer;
