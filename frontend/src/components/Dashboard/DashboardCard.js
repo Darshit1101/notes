@@ -223,7 +223,7 @@ function DashboardCard(props) {
       >
         <Modal.Section>
           <Box paddingBlockEnd={0} paddingBlockStart={0}>
-            {state.des}
+            <div className='data_desc'>{state.des}</div>
           </Box>
         </Modal.Section>
       </Modal >

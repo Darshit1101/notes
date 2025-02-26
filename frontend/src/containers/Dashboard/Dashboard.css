@@ -35,3 +35,7 @@
 .searchBar .Polaris-TextField {
   height: 28px;
 }
+
+.data_desc {
+  word-break: break-all;
+}
