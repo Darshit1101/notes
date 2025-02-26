@@ -41,5 +41,9 @@
 }
 
 .viewModal_title {
-  background-color: #d9ffee;
+  max-width: 552px;
+  white-space: nowrap;
+  overflow: hidden;
+  /* text-overflow: ellipsis; */
+
 }
