@@ -58,7 +58,7 @@ function MyprofileCard(props) {
                     />
                   </div>
                 </InlineGrid>
-                <Box>
+                <Box paddingBlockStart={200}>
                   <Button variant="primary" tone='success' onClick={() => handleChangePassword()}>Save</Button>
                 </Box>
               </BlockStack>
