@@ -17,7 +17,7 @@ const Dashboard = () => {
     notesValue: '',//search bar state value
     popoverActive: false,
     Category: '',
-    selectedCategory: 'all'
+    selectedCategory: ''//select the Category
   })
 
   const changeNameValue = useCallback((obj) => {
