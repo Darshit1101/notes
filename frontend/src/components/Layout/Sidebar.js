@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from '@shopify/polaris';
-import { HomeIcon, HomeFilledIcon, WorkFilledIcon, WorkIcon, SettingsFilledIcon, SettingsIcon } from '@shopify/polaris-icons';
+import { HomeIcon, HomeFilledIcon, WorkFilledIcon, WorkIcon, SettingsFilledIcon, SettingsIcon, FileFilledIcon, FileIcon } from '@shopify/polaris-icons';
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function Sidebar() {
     <div>
       <Navigation location="/">
         <Navigation.Section
-        fill
+          fill
 
           items={[
             {
@@ -23,6 +23,12 @@ function Sidebar() {
               icon: path === '/dashboard' ? HomeFilledIcon : HomeIcon,
               selected: path === '/dashboard',
               onClick: () => changeRoute('/dashboard'),
+            },
+            {
+              label: 'Manage notes',
+              icon: path === '/managenotes' ? FileFilledIcon : FileIcon,
+              selected: path === '/managenotes',
+              onClick: () => changeRoute('/managenotes'),
             },
             {
               label: 'Testing',
