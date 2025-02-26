@@ -18,9 +18,10 @@ function Myprofile(props) {
         npd: '', // new password
         isCurnPassVisible: false, // is current password visible
         isNewPassVisible: false, // is new password visible
+        errMessage: null, // error message
     });
 
-    //set data.
+    //set data. 
     const changeNameValue = useCallback((obj) => {
         setState((prevState) => ({ ...prevState, ...obj }))
     }, []);
@@ -46,12 +47,10 @@ function Myprofile(props) {
             validator.errorMessages?.pd == null ? changeNameValue({ errMessage: { ...state.errMessage, pd: null, npd: 'The new password field is required.' } }) : validator.errorMessages?.npd == null ? changeNameValue({ errMessage: { ...state.errMessage, pd: 'The current password field is required.', npd: null } }) : changeNameValue({ errMessage: { ...state.errMessage, pd: 'The current password field is required.', npd: 'The new password field is required.' } })
         }
         else {
-            console.log('ok')
             let obj = {
                 opd: encrypt(state.pd),
                 pd: encrypt(state.npd)
             };
-            console.log('obj', obj);
             dispatch(myprofile.cPwd(obj))
             if (localStorage.getItem('istm') === 'true') {
                 obj.istm = true;
