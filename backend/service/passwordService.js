@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 const CryptoJS = require('crypto-js');
 const _secretKey = "aSd3Rqwe3gn&%3)@3";//this key should be same in frontend
+// const SimpleCrypto = require('simple-crypto-js').default;
+// const simpleCrypto = new SimpleCrypto(_secretKey);
 
 //User Registration or Password Update
 exports.createHashPwd = function (password) {
@@ -13,6 +15,7 @@ exports.comparePwd = function (password, hashedPassword) {
     return bcrypt.compare(password, hashedPassword);
 };
 
+//Unlocks a hidden password
 exports.decryptPwd = function (cipherText) {
     try {
         const bytes = CryptoJS.AES.decrypt(cipherText, _secretKey);
@@ -22,3 +25,9 @@ exports.decryptPwd = function (cipherText) {
         console.log("Error in decryptPwd: ", error);
     }
 };
+
+exports.encryptPwd = function (plainText) {
+    // return simpleCrypto.encrypt(plainText);
+    const encryptPassword = CryptoJS.AES.encrypt(plainText, _secretKey).toString();
+    return encryptPassword;
+  }
