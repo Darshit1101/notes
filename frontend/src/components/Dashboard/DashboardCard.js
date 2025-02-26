@@ -218,7 +218,7 @@ function DashboardCard(props) {
       {/* view data modal  */}
       < Modal
         open={state.viewNoteModal}
-        title={state.tit}
+        title={<div className='viewModal_title'>{state.tit}</div>}
         onClose={(e) => props.openCloseModal('viewNoteModal', state.viewNoteModal, e)}
       >
         <Modal.Section>
