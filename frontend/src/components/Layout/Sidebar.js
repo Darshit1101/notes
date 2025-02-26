@@ -15,8 +15,6 @@ function Sidebar() {
     <div>
       <Navigation location="/">
         <Navigation.Section
-          fill
-
           items={[
             {
               label: 'Dashboard',
@@ -30,12 +28,20 @@ function Sidebar() {
               selected: path === '/managenotes',
               onClick: () => changeRoute('/managenotes'),
             },
+
+          ]}
+        />
+        <Navigation.Section
+          title="Testing section"
+          fill
+          items={[
             {
               label: 'Testing',
               icon: path === '/testing' ? WorkFilledIcon : WorkIcon,
               selected: path === '/testing',
               onClick: () => changeRoute('/testing'),
             },
+
           ]}
         />
         <Navigation.Section

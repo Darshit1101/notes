@@ -1,0 +1,13 @@
+#deleteBox {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.noteTitle {
+    color: #e04848;
+}
+
+.Polaris-IndexTable__TableCell #noteTitle {
+    max-width: 300px;
+    overflow: hidden;
+}
