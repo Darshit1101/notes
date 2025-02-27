@@ -11,7 +11,7 @@ module.exports = {
             await newNote.save();
 
             //get all notes
-            const notes = await getNotesByUserId({ uid });
+            const notes = await getNotesByUserId({ ti });
 
             return ({
                 status: 200,
@@ -29,7 +29,9 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
-            const notes = await getNotesByUserId(values.body);
+            const { ctr } = values.body
+            const { ti } = values.decoded
+            const notes = await getNotesByUserId({ ti, ctr });
 
             return {
                 status: 200,
@@ -46,14 +48,15 @@ module.exports = {
 
     deleteCard: async (values) => {
         try {
-            const { id, uid } = values.query;
+            const { ti } = values.decoded;
+            const { id } = values.query;
             // Find and delete the note
             await modalForNote.deleteOne({ _id: id });     //0 or 1 based on success or failure(sucess=>1, failure=>0)
             //or
             // await modalForNote.findByIdAndDelete(id);   //Deletes a document by its _id and also returns the deleted document.      
 
             // Fetch all notes from the database
-            const notes = await getNotesByUserId({ uid });
+            const notes = await getNotesByUserId({ ti });
 
             return {
                 status: 200,
@@ -71,11 +74,12 @@ module.exports = {
 
     editNote: async (values) => {
         try {
-            const { uid, nid, tit, des, ctr } = values.body;
+            const { ti } = values.decoded;
+            const { nid, tit, des, ctr } = values.body;
             await modalForNote.findByIdAndUpdate(nid, { tit, des, ctr, upd: new Date() });
 
             // Fetch all notes from the database
-            const notes = await getNotesByUserId({ uid });
+            const notes = await getNotesByUserId({ ti });
 
             return {
                 status: 200,
@@ -93,13 +97,16 @@ module.exports = {
     }
 }
 
-const getNotesByUserId = async (values) => {
-    const { uid, ctr } = values;  // Deconstruct values
 
-    const query = { uid };
+//main function for get notes
+const getNotesByUserId = async (values) => {
+    console.log('values=====>', values)
+    const { ti, ctr } = values;  // Deconstruct values
+
+    const query = { ti };
     if (ctr) {
         query.ctr = ctr;  // Filter by category if provided
     }
-
+    console.log('query=====>', query)
     return await modalForNote.find(query).sort({ cdt: -1 });
 };
