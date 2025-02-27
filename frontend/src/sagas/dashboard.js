@@ -9,7 +9,7 @@ function* addNote(action) {
     yield put(load());
     const res = yield call(api.POST, '/addnote', action.payload);
     if (res.status === 'success') {
-      yield put(actions.getAllNoteSuccess(res.data));
+      yield put(actions.getAllNoteSuccess(res));
       yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {
@@ -27,7 +27,7 @@ function* getAllNote(action) {
     yield put(load());
     const res = yield call(api.POST, '/getAllNotes', action.payload);
     if (res.status === 'success') {
-      yield put(actions.getAllNoteSuccess(res.data));
+      yield put(actions.getAllNoteSuccess(res));
     }
     else {
       yield put(toastify({ type: 'error', msg: res.m }));
@@ -44,7 +44,7 @@ function* deleteCard(action) {
     yield put(load());
     const res = yield call(api.DELETE, '/deleteCard?id=' + action.payload.id + '&uid=' + action.payload.uid);
     if (res.status === 'success') {
-      yield put(actions.getAllNoteSuccess(res.data));
+      yield put(actions.getAllNoteSuccess(res));
       yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {
@@ -62,7 +62,7 @@ function* editNote(action) {
     yield put(load());
     const res = yield call(api.POST, '/editNote', action.payload);
     if (res.status === 'success') {
-      yield put(actions.getAllNoteSuccess(res.data));
+      yield put(actions.getAllNoteSuccess(res));
       yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {

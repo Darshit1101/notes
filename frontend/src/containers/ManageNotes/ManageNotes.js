@@ -8,7 +8,9 @@ function ManageNotes() {
     const dispatch = useDispatch();
 
     const [state, setState] = useState({
-        ManageNotes: [] //manage notes data 
+        ManageNotes: [], //manage notes data 
+        paggiActive: 1,
+        pageNumber: 0,
     })
 
     //set data.
@@ -16,12 +18,15 @@ function ManageNotes() {
         setState((prevState) => ({ ...prevState, ...obj }))
     }, []);
 
-    let objData = { uid: localStorage.getItem('id') };
-    const getdataList = useSelector(state => state.dashboard.getAll)
+    const getdataList = useSelector(state => state.dashboard.getAll?.data)
+    const noteCount = useSelector(state => state.dashboard.getAll?.count)
 
     useEffect(() => {
-        dispatch(dashboardDucks.getAllNote(objData));
-    }, [])
+        let obj = {
+            num: state.paggiActive
+        };
+        dispatch(dashboardDucks.getAllNote(obj));
+    }, [state.paggiActive])
 
     useEffect(() => {
         if (getdataList) {
@@ -33,11 +38,30 @@ function ManageNotes() {
         console.log("delete modal")
     }
 
+    // paggination call
+    const onPaggiCall = (i) => {
+        let num = 0;
+        if (i === '+1') {
+            num = state.paggiActive + 1;
+        } else if (i === '-1') {
+            num = state.paggiActive - 1;
+        } else {
+            num = i;
+        }
+        changeNameValue({ paggiActive: num });
+    }
+
+    //get number of totaldata
+    useEffect(() => {
+        changeNameValue({ pageNumber: parseInt(Math.ceil(noteCount / 5)) });
+    }, [noteCount]);
+
     return (
         <ManageNotesCard
             state={state}
             changeNameValue={changeNameValue}
             handledeleteModal={handledeleteModal}
+            onPaggiCall={onPaggiCall}
         />
     )
 }

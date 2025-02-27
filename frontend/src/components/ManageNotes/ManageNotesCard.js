@@ -24,9 +24,14 @@ function ManageNotesCard(props) {
                             { title: 'Action' }
                         ]}
                         selectable={false}
+                        pagination={{
+                            hasPrevious: state.paggiActive > 1 ? true : false,
+                            hasNext: (state.paggiActive < state.pageNumber) ? true : false,
+                            onPrevious: () => props.onPaggiCall('-1'),
+                            onNext: () => props.onPaggiCall('+1')
+                        }}
                     >
                         {state.ManageNotes && state.ManageNotes.length > 0 && state.ManageNotes.map((i, index) => {
-                            console.log('i', i)
                             return (
                                 <>
                                     <IndexTable.Row key={index}>
