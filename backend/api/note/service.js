@@ -19,7 +19,7 @@ module.exports = {
                     status: 'success',
                     m: 'Note added successfully',
                     data: notes,
-                    Count: totalCount
+                    count: totalCount
                 }
             });
         } catch (error) {
@@ -39,7 +39,7 @@ module.exports = {
                 data: {
                     status: 'success',
                     data: notes,
-                    Count: totalCount
+                    count: totalCount
                 },
             };
         } catch (error) {
@@ -66,7 +66,7 @@ module.exports = {
                     status: 'success',
                     m: 'Note deleted successfully',
                     data: notes,
-                    Count: totalCount
+                    count: totalCount
                 },
             };
         } catch (error) {
@@ -90,7 +90,7 @@ module.exports = {
                     status: 'success',
                     m: 'Note updated successfully',
                     data: notes,
-                    Count: totalCount
+                    count: totalCount
                 },
             }
         }
