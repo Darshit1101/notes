@@ -29,9 +29,7 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
-            let { uid } = values.body;
-
-            const notes = await getNotesByUserId({ uid });
+            const notes = await getNotesByUserId(values.body);
 
             return {
                 status: 200,
