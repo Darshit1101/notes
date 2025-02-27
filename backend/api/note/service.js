@@ -30,9 +30,9 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
-            const { ctr } = values.body
+            const { ctr, num } = values.body
             const { ti } = values.decoded
-            const { totalCount, notes } = await getNotesByUserId({ ti, ctr });
+            const { totalCount, notes } = await getNotesByUserId({ ti, ctr, num });
 
             return {
                 status: 200,
@@ -104,19 +104,26 @@ module.exports = {
 
 //main function for get notes
 const getNotesByUserId = async (values) => {
-    console.log('values=====>', values)
-    const { ti, ctr } = values;  // Deconstruct values
+    // console.log('values=====>', values)
+    const { ti, ctr, num } = values;  // Deconstruct values
 
     const query = { ti };
     if (ctr) {
         query.ctr = ctr;  // Filter by category if provided
     }
-    console.log('query=====>', query)
+
+    //Pagination set
+    let _pageNo = num;
+    let _pageSize = env.PAGE_SIZE;
+    let _skip = (parseInt(_pageNo) - 1) * parseInt(_pageSize);
+    let _take = parseInt(_pageSize);
+    // console.log('query=====>', query)
 
     // Fetch count and notes in parallel to optimize performance
     const [totalCount, notes] = await Promise.all([
         modalForNote.countDocuments(query),
-        modalForNote.find(query).sort({ cdt: -1 }),
+        // modalForNote.find(query).sort({ cdt: -1 }),
+        modalForNote.find(query).skip(_skip).limit(_take).sort({ cdt: -1 }),
     ]);
 
     return { totalCount, notes };
