@@ -11,14 +11,15 @@ module.exports = {
             await newNote.save();
 
             //get all notes
-            const notes = await getNotesByUserId({ ti });
+            const { totalCount, notes } = await getNotesByUserId({ ti });
 
             return ({
                 status: 200,
                 data: {
                     status: 'success',
                     m: 'Note added successfully',
-                    data: notes
+                    data: notes,
+                    Count: totalCount
                 }
             });
         } catch (error) {
@@ -31,13 +32,14 @@ module.exports = {
         try {
             const { ctr } = values.body
             const { ti } = values.decoded
-            const notes = await getNotesByUserId({ ti, ctr });
+            const { totalCount, notes } = await getNotesByUserId({ ti, ctr });
 
             return {
                 status: 200,
                 data: {
                     status: 'success',
                     data: notes,
+                    Count: totalCount
                 },
             };
         } catch (error) {
@@ -56,7 +58,7 @@ module.exports = {
             // await modalForNote.findByIdAndDelete(id);   //Deletes a document by its _id and also returns the deleted document.      
 
             // Fetch all notes from the database
-            const notes = await getNotesByUserId({ ti });
+            const { totalCount, notes } = await getNotesByUserId({ ti });
 
             return {
                 status: 200,
@@ -64,6 +66,7 @@ module.exports = {
                     status: 'success',
                     m: 'Note deleted successfully',
                     data: notes,
+                    Count: totalCount
                 },
             };
         } catch (error) {
@@ -79,14 +82,15 @@ module.exports = {
             await modalForNote.findByIdAndUpdate(nid, { tit, des, ctr, upd: new Date() });
 
             // Fetch all notes from the database
-            const notes = await getNotesByUserId({ ti });
+            const { totalCount, notes } = await getNotesByUserId({ ti });
 
             return {
                 status: 200,
                 data: {
                     status: 'success',
                     m: 'Note updated successfully',
-                    data: notes
+                    data: notes,
+                    Count: totalCount
                 },
             }
         }
@@ -108,5 +112,12 @@ const getNotesByUserId = async (values) => {
         query.ctr = ctr;  // Filter by category if provided
     }
     console.log('query=====>', query)
-    return await modalForNote.find(query).sort({ cdt: -1 });
+
+    // Fetch count and notes in parallel to optimize performance
+    const [totalCount, notes] = await Promise.all([
+        modalForNote.countDocuments(query),
+        modalForNote.find(query).sort({ cdt: -1 }),
+    ]);
+
+    return { totalCount, notes };
 };
