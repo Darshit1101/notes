@@ -34,8 +34,13 @@ function ManageNotes() {
         }
     }, [getdataList]);
 
-    const handledeleteModal = () => {
-        console.log("delete modal")
+    //delete note particular
+    const handledeleteModal = (id) => {
+        let obj = {
+            id: id,
+            num: state.paggiActive
+        }
+        dispatch(dashboardDucks.deleteCard(obj))
     }
 
     // paggination call
