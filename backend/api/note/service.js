@@ -51,14 +51,14 @@ module.exports = {
     deleteCard: async (values) => {
         try {
             const { ti } = values.decoded;
-            const { id } = values.query;
+            const { id, num } = values.query;
             // Find and delete the note
             await modalForNote.deleteOne({ _id: id });     //0 or 1 based on success or failure(sucess=>1, failure=>0)
             //or
             // await modalForNote.findByIdAndDelete(id);   //Deletes a document by its _id and also returns the deleted document.      
 
             // Fetch all notes from the database
-            const { totalCount, notes } = await getNotesByUserId({ ti });
+            const { totalCount, notes } = await getNotesByUserId({ ti, num });
 
             return {
                 status: 200,
@@ -104,21 +104,21 @@ module.exports = {
 
 //main function for get notes
 const getNotesByUserId = async (values) => {
-    // console.log('values=====>', values)
+    console.log('values=====>', values)
     const { ti, ctr, num } = values;  // Deconstruct values
-
+    const PageNumber = Number(num)//convert string to number
     const query = { ti };
     if (ctr) {
         query.ctr = ctr;  // Filter by category if provided
     }
 
     //Pagination set
-    let _pageNo = num;
+    let _pageNo = PageNumber;
     let _pageSize = env.PAGE_SIZE;
     let _skip = (parseInt(_pageNo) - 1) * parseInt(_pageSize);
     let _take = parseInt(_pageSize);
 
-    const queryPromise = num
+    const queryPromise = PageNumber
         ? modalForNote.find(query).skip(_skip).limit(_take).sort({ cdt: -1 })
         : modalForNote.find(query).sort({ cdt: -1 });
 
