@@ -67,7 +67,6 @@ const Dashboard = () => {
   const handledeleteCard = (id) => {
     let obj = {
       id: id,
-      uid: localStorage.getItem('id')
     }
     dispatch(dashboardDucks.deleteCard(obj))
   }
