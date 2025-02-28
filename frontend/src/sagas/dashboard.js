@@ -42,7 +42,7 @@ function* getAllNote(action) {
 function* deleteCard(action) {
   try {
     yield put(load());
-    const res = yield call(api.DELETE, '/deleteCard?id=' + action.payload.id + '&uid=' + action.payload.uid);
+    const res = yield call(api.DELETE, '/deleteCard?id=' + action.payload.id + '&num=' + action.payload.num);
     if (res.status === 'success') {
       yield put(actions.getAllNoteSuccess(res));
       yield put(toastify({ type: 'success', msg: res.m }));
