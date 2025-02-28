@@ -9,7 +9,7 @@ function ManageNotes() {
 
     const [state, setState] = useState({
         ManageNotes: [], //manage notes data 
-        paggiActive: 1,
+        paggiActive: 1,//page number
         pageNumber: 0,
     })
 
@@ -56,12 +56,20 @@ function ManageNotes() {
         changeNameValue({ pageNumber: parseInt(Math.ceil(noteCount / 5)) });
     }, [noteCount]);
 
+    // Function to get the correct index number based on pagination
+    const getIndexNumber = (index) => {
+        const itemsPerPage = 5;  // Change this based on your pagination setting
+        const startIndex = (state.paggiActive - 1) * itemsPerPage;
+        return startIndex + index + 1;
+    };
+
     return (
         <ManageNotesCard
             state={state}
             changeNameValue={changeNameValue}
             handledeleteModal={handledeleteModal}
             onPaggiCall={onPaggiCall}
+            getIndexNumber={getIndexNumber}
         />
     )
 }

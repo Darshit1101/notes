@@ -18,7 +18,7 @@ function ManageNotesCard(props) {
                     <IndexTable
                         itemCount={state.ManageNotes?.length || 0}
                         headings={[
-                            { title: '#' },
+                            { title: 'No' },
                             { title: 'Title' },
                             { title: 'Created date' },
                             { title: 'Action' }
@@ -37,7 +37,7 @@ function ManageNotesCard(props) {
                                     <IndexTable.Row key={index}>
                                         <IndexTable.Cell>
                                             <Text variant="bodyMd" fontWeight="bold" as="span">
-                                                {index + 1}
+                                                {props.getIndexNumber(index)}
                                             </Text>
                                         </IndexTable.Cell>
                                         <IndexTable.Cell><div id='noteTitle'>{i.tit}</div></IndexTable.Cell>
