@@ -117,13 +117,15 @@ const getNotesByUserId = async (values) => {
     let _pageSize = env.PAGE_SIZE;
     let _skip = (parseInt(_pageNo) - 1) * parseInt(_pageSize);
     let _take = parseInt(_pageSize);
-    // console.log('query=====>', query)
+
+    const queryPromise = num
+        ? modalForNote.find(query).skip(_skip).limit(_take).sort({ cdt: -1 })
+        : modalForNote.find(query).sort({ cdt: -1 });
 
     // Fetch count and notes in parallel to optimize performance
     const [totalCount, notes] = await Promise.all([
         modalForNote.countDocuments(query),
-        // modalForNote.find(query).sort({ cdt: -1 }),
-        modalForNote.find(query).skip(_skip).limit(_take).sort({ cdt: -1 }),
+        queryPromise,
     ]);
 
     return { totalCount, notes };
