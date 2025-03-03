@@ -75,6 +75,34 @@ module.exports = {
         }
     },
 
+    deleteBulkNotes: async (values) => {
+        try {
+            const { ti } = values.decoded;
+            const { arr_id, typ } = values.body;
+
+            if (typ == 'delete') {
+                //remove data from mongoDB
+                await modalForNote.deleteMany({ _id: { $in: arr_id } });
+            }
+
+            // Fetch all notes from the database
+            const { count, notes } = await getNotesByUserId({ ti, num });
+
+            return {
+                status: 200,
+                data: {
+                    status: 'success',
+                    m: 'Note deleted successfully',
+                    data: notes,
+                    count: count
+                },
+            };
+        } catch (error) {
+            console.log('deleteCard===>', error);
+            return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
+        }
+    },
+
     editNote: async (values) => {
         try {
             const { ti } = values.decoded;

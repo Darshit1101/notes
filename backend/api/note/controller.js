@@ -13,6 +13,10 @@ module.exports = {
         const data = await service.deleteCard(req);
         res.status(data.status).send(data.data);
     },
+    deleteBulkNotes: async (req, res) => {
+        const data = await service.deleteBulkNotes(req);
+        res.status(data.status).send(data.data);
+    },
     editNote: async (req, res) => {
         const data = await service.editNote(req);
         res.status(data.status).send(data.data);
