@@ -81,6 +81,7 @@ function ManageNotes() {
             arr_id: selectedResources,
         }
         dispatch(dashboardDucks.deleteBulkNotes(obj))
+        selectedResources.splice(0, selectedResources.length);
     }
 
     return (
