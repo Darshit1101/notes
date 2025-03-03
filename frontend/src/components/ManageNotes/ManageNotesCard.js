@@ -16,7 +16,7 @@ function ManageNotesCard(props) {
             >
                 <Card padding={0}>
                     <IndexTable
-                        itemCount={state.ManageNotes?.length || 0}
+                        itemCount={state.ManageNotes?.length}
                         headings={[
                             { title: 'No' },
                             { title: 'Title' },
