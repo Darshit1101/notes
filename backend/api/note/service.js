@@ -86,7 +86,7 @@ module.exports = {
             }
 
             // Fetch all notes from the database
-            const { count, notes } = await getNotesByUserId({ ti, num });
+            const { count, notes } = await getNotesByUserId({ ti });
 
             return {
                 status: 200,
