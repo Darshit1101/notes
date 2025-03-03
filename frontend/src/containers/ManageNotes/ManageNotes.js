@@ -3,6 +3,7 @@ import './ManageNotes.css';
 import ManageNotesCard from "../../components/ManageNotes/ManageNotesCard";
 import { useDispatch, useSelector } from "react-redux";
 import * as dashboardDucks from '../../ducks/dashboard';
+import { useIndexResourceState } from '@shopify/polaris';
 
 function ManageNotes() {
     const dispatch = useDispatch();
@@ -68,6 +69,16 @@ function ManageNotes() {
         return startIndex + index + 1;
     };
 
+    //selected resources all selected
+    let Tdata = [];
+    Tdata = state.ManageNotes && state.ManageNotes.length > 0 && state.ManageNotes.map(x => ({ ...x, id: x._id }));//id add in data
+    const { selectedResources, handleSelectionChange } = useIndexResourceState(Tdata);
+
+    //bulk delete
+    const onDeleteBulkAction = () => {
+        console.log('onDeleteBulkAction');
+    }
+
     return (
         <ManageNotesCard
             state={state}
@@ -75,6 +86,9 @@ function ManageNotes() {
             handledeleteModal={handledeleteModal}
             onPaggiCall={onPaggiCall}
             getIndexNumber={getIndexNumber}
+            onDeleteBulkAction={onDeleteBulkAction}
+            selectedResources={selectedResources}
+            handleSelectionChange={handleSelectionChange}
         />
     )
 }
