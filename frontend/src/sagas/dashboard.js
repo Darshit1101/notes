@@ -57,6 +57,24 @@ function* deleteCard(action) {
   }
 }
 
+function* deleteBulkNotes(action) {
+  try {
+    yield put(load());
+    const res = yield call(api.POST, '/deleteBulkNotes', action.payload);
+    if (res.status === 'success') {
+      yield put(actions.getAllNoteSuccess(res));
+      yield put(toastify({ type: 'success', msg: res.m }));
+    }
+    else {
+      yield put(toastify({ type: 'error', msg: res.m }));
+    }
+    yield put(loaded());
+  } catch (error) {
+    yield put(loaded());
+    yield put(toastify({ type: 'error', msg: 'Something went wrong while doing. Please try again.' }));
+  }
+}
+
 function* editNote(action) {
   try {
     yield put(load());
@@ -80,6 +98,7 @@ export function* watchGetDashboard() {
   yield takeLatest(actions.getAllNote.type, getAllNote);
   yield takeLatest(actions.deleteCard.type, deleteCard);
   yield takeLatest(actions.editNote.type, editNote);
+  yield takeLatest(actions.deleteBulkNotes.type, deleteBulkNotes);
 }
 
 export default function* rootSaga() {

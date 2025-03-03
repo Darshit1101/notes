@@ -76,7 +76,11 @@ function ManageNotes() {
 
     //bulk delete
     const onDeleteBulkAction = () => {
-        console.log('onDeleteBulkAction');
+        let obj = {
+            typ: 'delete',
+            arr_id: selectedResources,
+        }
+        dispatch(dashboardDucks.deleteBulkNotes(obj))
     }
 
     return (
