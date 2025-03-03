@@ -71,7 +71,7 @@ function ManageNotes() {
 
     //selected resources all selected
     let Tdata = [];
-    Tdata = state.ManageNotes && state.ManageNotes.length > 0 && state.ManageNotes.map(x => ({ ...x, id: x._id }));//id add in data
+    Tdata = state.ManageNotes && state.ManageNotes.length > 0 && state.ManageNotes.map(x => ({ ...x, id: x._id }));//id Field add in data
     const { selectedResources, handleSelectionChange } = useIndexResourceState(Tdata);
 
     //bulk delete
