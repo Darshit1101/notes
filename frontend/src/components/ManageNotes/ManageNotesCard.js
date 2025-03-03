@@ -7,7 +7,7 @@ import { ArrowDiagonalIcon, DeleteIcon } from '@shopify/polaris-icons';
 import moment from 'moment';
 
 function ManageNotesCard(props) {
-    const { state, handledeleteModal } = props;
+    const { state, changeNameValue, handledeleteModal } = props;
 
     const promotedBulkActions = [
         {
@@ -47,6 +47,7 @@ function ManageNotesCard(props) {
                                     id={i._id}
                                     key={index}
                                     selected={props.selectedResources.includes(i._id)}
+                                    onClick={() => changeNameValue({})}  //for whole row click none
                                 >
                                     <IndexTable.Cell>
                                         <Text variant="bodyMd" fontWeight="bold" as="span">
