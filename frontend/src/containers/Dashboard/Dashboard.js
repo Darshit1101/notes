@@ -24,11 +24,10 @@ const Dashboard = () => {
     setState((prevState) => ({ ...prevState, ...obj }));
   }, []);
 
-  let objData = { uid: localStorage.getItem('id') };
   const getdataList = useSelector(state => state.dashboard.getAll?.data)
 
   useEffect(() => {
-    dispatch(dashboardDucks.getAllNote(objData));
+    dispatch(dashboardDucks.getAllNote());
   }, [])
 
   useEffect(() => {
@@ -133,6 +132,9 @@ const Dashboard = () => {
   const handleCategorySelection = (label, value) => {
     const newCategory = label === 'All' ? '' : label;
     changeNameValue({ popoverActive: false, Category: newCategory });
+
+    let objData = {};
+
     // Conditionally manage the `ctr` property in objData
     if (value === 'all') {
       delete objData.ctr; // Remove `ctr` for default API call
