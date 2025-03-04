@@ -12,11 +12,21 @@ function ManageNotes() {
         ManageNotes: [], //manage notes data 
         paggiActive: 1,//page number
         pageNumber: 0,
+        viewDataModal: false,
+        tit: '',
+        des: ''
     })
 
     //set data.
     const changeNameValue = useCallback((obj) => {
         setState((prevState) => ({ ...prevState, ...obj }))
+    }, []);
+
+    //open close modal
+    const openCloseModal = useCallback((name, value, type) => {
+        if (type !== undefined) {
+            changeNameValue({ [name]: !value });
+        }
     }, []);
 
     const getdataList = useSelector(state => state.dashboard.getAll?.data)
@@ -42,6 +52,16 @@ function ManageNotes() {
             num: state.paggiActive
         }
         dispatch(dashboardDucks.deleteCard(obj))
+    }
+
+    //view data on view btn click
+    const handleViewModal = (data) => {
+        let obj = {
+            tit: data.tit,
+            des: data.des,
+        }
+        changeNameValue(obj)
+        openCloseModal('viewDataModal', state.viewDataModal, 'open');
     }
 
     // paggination call
@@ -94,6 +114,8 @@ function ManageNotes() {
             onDeleteBulkAction={onDeleteBulkAction}
             selectedResources={selectedResources}
             handleSelectionChange={handleSelectionChange}
+            handleViewModal={handleViewModal}
+            openCloseModal={openCloseModal}
         />
     )
 }

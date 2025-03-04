@@ -3,11 +3,11 @@ import {
     IndexTable, useSetIndexFiltersMode, Divider, InlineStack, DatePicker, IndexFilters, useBreakpoints, Text, Card, Page, Button, Popover, Box, ButtonGroup, Modal, PageActions, InlineGrid, TextField, OptionList, Tooltip,
     BlockStack, IndexFiltersMode, EmptySearchResult, Banner, Icon
 } from "@shopify/polaris";
-import { ArrowDiagonalIcon, DeleteIcon } from '@shopify/polaris-icons';
+import { ViewIcon, DeleteIcon } from '@shopify/polaris-icons';
 import moment from 'moment';
 
 function ManageNotesCard(props) {
-    const { state, changeNameValue, handledeleteModal } = props;
+    const { state, changeNameValue, handledeleteModal, handleViewModal } = props;
 
     const promotedBulkActions = [
         {
@@ -58,14 +58,25 @@ function ManageNotesCard(props) {
                                     <IndexTable.Cell>{moment(new Date(i.cdt)).format('MMM-DD-YYYY hh:mm:ss a')}</IndexTable.Cell>
 
                                     <IndexTable.Cell>
-                                        <div id="deleteBox" onClick={() => handledeleteModal(i._id)}>
-                                            <Banner hideIcon tone='critical'>
-                                                <Icon
-                                                    source={DeleteIcon}
-                                                    tone="critical"
-                                                />
-                                            </Banner>
-                                        </div>
+                                        <InlineStack gap={200}>
+                                            <div id="action-box" onClick={() => handledeleteModal(i._id)}>
+                                                <Banner hideIcon tone='critical'>
+                                                    <Icon
+                                                        source={DeleteIcon}
+                                                        tone="critical"
+                                                    />
+                                                </Banner>
+                                            </div>
+
+                                            <div id="action-box" onClick={() => handleViewModal(i)}>
+                                                <Banner hideIcon tone='success'>
+                                                    <Icon
+                                                        source={ViewIcon}
+                                                        tone="success"
+                                                    />
+                                                </Banner>
+                                            </div>
+                                        </InlineStack>
                                     </IndexTable.Cell>
                                 </IndexTable.Row>
                             )
@@ -74,7 +85,23 @@ function ManageNotesCard(props) {
                     </IndexTable>
                 </Card>
             </Page>
+
+            {/* view data modal  */}
+            < Modal
+                open={state.viewDataModal}
+                title={<div className='viewModal_title'>{state.tit}</div>}
+                onClose={(e) => props.openCloseModal('viewDataModal', state.viewDataModal, e)}
+            >
+                <Modal.Section>
+                    <Box paddingBlockEnd={0} paddingBlockStart={0}>
+                        <div className='data_desc'>{state.des}</div>
+                    </Box>
+                </Modal.Section>
+            </Modal >
+
         </div>
+
+
     )
 }
 export default ManageNotesCard;

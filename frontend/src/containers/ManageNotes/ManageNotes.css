@@ -1,4 +1,4 @@
-#deleteBox {
+#action-box {
     width: fit-content;
     cursor: pointer;
 }
@@ -10,4 +10,15 @@
 .Polaris-IndexTable__TableCell #noteTitle {
     max-width: 300px;
     overflow: hidden;
+}
+
+.viewModal_title {
+    max-width: 552px;
+    white-space: nowrap;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+}
+
+.data_desc {
+    word-break: break-all;
 }
