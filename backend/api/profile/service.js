@@ -58,7 +58,7 @@ module.exports = {
     }
     catch (e) {
       console.error('cPwd========>', e);
-      // addErrorLog(values.decoded.uk, "/profile/cPwd", e.toString(), e.message ? e.message : e.toString());
+      addErrorLog(ti, e.toString(), e.message ? e.message : e.toString());
       return ({ status: 200, data: { status: "success", m: 'error' } });
     }
   },

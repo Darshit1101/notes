@@ -31,3 +31,15 @@ global.createAuthToken = (userData) => {
     let token = jwt.sign({ ti: userData.ti, id: userData._id, email: userData.e }, process.env.JWT_SECRET_KEY, { expiresIn: '2400h' });
     return token;
 }
+
+//create entry and error collection
+global.addErrorLog = function (ti, error, message) {
+    var objData = {
+        ti: ti,
+        error: error,
+        message: message,
+        cdt: new Date()
+    };
+    var obj = new modalErrorLog(objData);
+    obj.save();
+};
