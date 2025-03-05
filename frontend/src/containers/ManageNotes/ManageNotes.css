@@ -22,3 +22,11 @@
 .data_desc {
     word-break: break-all;
 }
+
+#main-note-box {
+    min-height: 100px;
+}
+
+.dawn_Modal_title {
+    word-break: break-all;
+}

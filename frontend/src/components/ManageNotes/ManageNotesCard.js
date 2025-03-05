@@ -1,13 +1,13 @@
 import React from 'react'
 import {
     IndexTable, useSetIndexFiltersMode, Divider, InlineStack, DatePicker, IndexFilters, useBreakpoints, Text, Card, Page, Button, Popover, Box, ButtonGroup, Modal, PageActions, InlineGrid, TextField, OptionList, Tooltip,
-    BlockStack, IndexFiltersMode, EmptySearchResult, Banner, Icon
+    BlockStack, IndexFiltersMode, EmptySearchResult, Banner, Icon,
 } from "@shopify/polaris";
-import { ViewIcon, DeleteIcon } from '@shopify/polaris-icons';
+import { ViewIcon, DeleteIcon, PageDownIcon } from '@shopify/polaris-icons';
 import moment from 'moment';
 
 function ManageNotesCard(props) {
-    const { state, changeNameValue, handledeleteModal, handleViewModal } = props;
+    const { state, changeNameValue, handledeleteModal, handleViewModal, handleDownloadModal } = props;
 
     const promotedBulkActions = [
         {
@@ -76,6 +76,15 @@ function ManageNotesCard(props) {
                                                     />
                                                 </Banner>
                                             </div>
+
+                                            <div id="action-box" onClick={() => handleDownloadModal(i)}>
+                                                <Banner hideIcon tone='info'>
+                                                    <Icon
+                                                        source={PageDownIcon}
+                                                        tone="info"
+                                                    />
+                                                </Banner>
+                                            </div>
                                         </InlineStack>
                                     </IndexTable.Cell>
                                 </IndexTable.Row>
@@ -96,6 +105,33 @@ function ManageNotesCard(props) {
                     <Box paddingBlockEnd={0} paddingBlockStart={0}>
                         <div className='data_desc'>{state.des}</div>
                     </Box>
+                </Modal.Section>
+            </Modal >
+
+            {/* dawnload data modal  */}
+            < Modal
+                open={state.dawnloadDataModal}
+                title={'Dawnload note'}
+                onClose={(e) => props.openCloseModal('dawnloadDataModal', state.dawnloadDataModal, e)}
+            >
+                <Modal.Section>
+                    <div id='main-note-box'>
+                        <div className='dawn_Modal_title'>{state.tit}</div>
+                        <Box paddingBlockStart={400}>
+                            <Divider />
+                        </Box>
+                        <Box paddingBlockStart={400}>
+                            <div className='data_desc'>{state.des}</div>
+                        </Box>
+                    </div>
+                    <Box paddingBlockStart={400}>
+                        <Divider />
+                    </Box>
+                    <InlineStack align='center'>
+                        <Box paddingBlockStart={400}>
+                            <Button variant="primary" tone="success" onClick={() => props.handleSaveNote()}>Dawnload</Button>
+                        </Box>
+                    </InlineStack>
                 </Modal.Section>
             </Modal >
 

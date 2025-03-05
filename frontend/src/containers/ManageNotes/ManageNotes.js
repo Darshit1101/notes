@@ -4,6 +4,7 @@ import ManageNotesCard from "../../components/ManageNotes/ManageNotesCard";
 import { useDispatch, useSelector } from "react-redux";
 import * as dashboardDucks from '../../ducks/dashboard';
 import { useIndexResourceState } from '@shopify/polaris';
+import domtoimage from "dom-to-image";
 
 function ManageNotes() {
     const dispatch = useDispatch();
@@ -14,7 +15,8 @@ function ManageNotes() {
         pageNumber: 0,
         viewDataModal: false,
         tit: '',
-        des: ''
+        des: '',
+        dawnloadDataModal: false
     })
 
     //set data.
@@ -62,6 +64,29 @@ function ManageNotes() {
         }
         changeNameValue(obj)
         openCloseModal('viewDataModal', state.viewDataModal, 'open');
+    }
+
+    //open dawnload modal 
+    const handleDownloadModal = (data) => {
+        let obj = {
+            tit: data.tit,
+            des: data.des,
+        }
+        changeNameValue(obj)
+        openCloseModal('dawnloadDataModal', state.dawnloadDataModal, 'open');
+    }
+
+    //dawnload note
+    const handleSaveNote = () => {
+        var _html = document.getElementById('main-note-box');
+        domtoimage.toPng(_html, { bgcolor: "#ffffff" })
+            .then((dataUrl) => {
+                const link = document.createElement("a");
+                link.href = dataUrl;
+                link.download = "captured-area.png"; // File name
+                link.click();
+            })
+            .catch((error) => console.error("Error capturing image:", error));
     }
 
     // paggination call
@@ -116,6 +141,8 @@ function ManageNotes() {
             handleSelectionChange={handleSelectionChange}
             handleViewModal={handleViewModal}
             openCloseModal={openCloseModal}
+            handleDownloadModal={handleDownloadModal}
+            handleSaveNote={handleSaveNote}
         />
     )
 }
