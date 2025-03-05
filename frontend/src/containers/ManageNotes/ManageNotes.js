@@ -16,7 +16,8 @@ function ManageNotes() {
         viewDataModal: false,
         tit: '',
         des: '',
-        dawnloadDataModal: false
+        dawnloadDataModal: false,
+        profile: {}
     })
 
     //set data.
@@ -33,6 +34,7 @@ function ManageNotes() {
 
     const getdataList = useSelector(state => state.dashboard.getAll?.data)
     const noteCount = useSelector(state => state.dashboard.getAll?.count)
+    const profile = useSelector((state) => state.auth.profile);
 
     useEffect(() => {
         let obj = {
@@ -45,7 +47,10 @@ function ManageNotes() {
         if (getdataList) {
             changeNameValue({ ManageNotes: getdataList });
         }
-    }, [getdataList]);
+        if (profile) {
+            changeNameValue({ profile: profile });
+        }
+    }, [getdataList, profile]);
 
     //delete note particular
     const handledeleteModal = (id) => {
@@ -83,7 +88,7 @@ function ManageNotes() {
             .then((dataUrl) => {
                 const link = document.createElement("a");
                 link.href = dataUrl;
-                link.download = "captured-area.png"; // File name
+                link.download = new Date().getTime() + '_' + state.profile.fn + '.png';
                 link.click();
             })
             .catch((error) => console.error("Error capturing image:", error));
