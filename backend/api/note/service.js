@@ -30,9 +30,9 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
-            const { ctr, num } = values.body
+            const { ctr, num, srt } = values.body
             const { ti } = values.decoded
-            const { count, notes } = await getNotesByUserId({ ti, ctr, num });
+            const { count, notes } = await getNotesByUserId({ ti, ctr, num, srt });
 
             return {
                 status: 200,
@@ -133,13 +133,21 @@ module.exports = {
 //main function for get notes
 const getNotesByUserId = async (values) => {
     // console.log('values=====>', values)
-    const { ti, ctr, num } = values;  // Deconstruct values
+    const { ti, ctr, num, srt } = values;  // Deconstruct values
     const PageNumber = Number(num)//convert string to number
     const query = { ti };
+    let _sort = {};
+
     if (ctr) {
         query.ctr = ctr;  // Filter by category if provided
     }
 
+    //sort search filter condition 
+    if (srt != '' && srt !== undefined) {
+        let sortAry = srt.split(" ");
+        _sort[sortAry[0]] = JSON.parse(sortAry[1]);
+    }
+    console.log('_sort=====>', _sort)
     //Pagination set
     let _pageNo = PageNumber;
     let _pageSize = env.PAGE_SIZE;
@@ -147,8 +155,8 @@ const getNotesByUserId = async (values) => {
     let _take = parseInt(_pageSize);
 
     const queryPromise = PageNumber
-        ? modalForNote.find(query).skip(_skip).limit(_take).sort({ cdt: -1 })
-        : modalForNote.find(query).sort({ cdt: -1 });
+        ? modalForNote.find(query).skip(_skip).limit(_take).sort(_sort)
+        : modalForNote.find(query).sort(_sort);
 
     // Fetch count and notes in parallel to optimize performance
     const [count, notes] = await Promise.all([
