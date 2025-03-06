@@ -146,8 +146,10 @@ const getNotesByUserId = async (values) => {
     if (srt != '' && srt !== undefined) {
         let sortAry = srt.split(" ");
         _sort[sortAry[0]] = JSON.parse(sortAry[1]);
+    } else {
+        _sort = { cdt: -1 };  // Default sorting by created date in descending order
     }
-    console.log('_sort=====>', _sort)
+
     //Pagination set
     let _pageNo = PageNumber;
     let _pageSize = env.PAGE_SIZE;
