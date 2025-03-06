@@ -43,6 +43,7 @@ module.exports = {
             });
         } catch (error) {
             console.error('createRegister===>', error);
+            addErrorLog(ti, e.toString(), e.message ? e.message : e.toString());
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
         }
     },
@@ -81,6 +82,7 @@ module.exports = {
             });
         } catch (error) {
             console.error('createLogin===>', error);
+            addErrorLog(ti, e.toString(), e.message ? e.message : e.toString());
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
         }
     },
