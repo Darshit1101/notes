@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as dashboardDucks from '../../ducks/dashboard';
 import { useIndexResourceState } from '@shopify/polaris';
 import domtoimage from "dom-to-image";
+import { call } from 'redux-saga/effects';
 
 function ManageNotes() {
     const dispatch = useDispatch();
@@ -17,7 +18,8 @@ function ManageNotes() {
         tit: '',
         des: '',
         dawnloadDataModal: false,
-        profile: {}
+        profile: {},
+        sortSelected: ['cdt desc']
     })
 
     //set data.
@@ -36,12 +38,12 @@ function ManageNotes() {
     const noteCount = useSelector(state => state.dashboard.getAll?.count)
     const profile = useSelector((state) => state.auth.profile);
 
-    useEffect(() => {
-        let obj = {
-            num: state.paggiActive
-        };
-        dispatch(dashboardDucks.getAllNote(obj));
-    }, [state.paggiActive])
+    // useEffect(() => {
+    //     let obj = {
+    //         num: state.paggiActive
+    //     };
+    //     dispatch(dashboardDucks.getAllNote(obj));
+    // }, [state.paggiActive])
 
     useEffect(() => {
         if (getdataList) {
@@ -132,6 +134,21 @@ function ManageNotes() {
         }
         dispatch(dashboardDucks.deleteBulkNotes(obj))
         selectedResources.splice(0, selectedResources.length);//original array change (empty)
+    }
+
+    //call main api on state change
+    useEffect(() => {
+        callNoteApi();
+    }, [state.sortSelected, state.paggiActive])
+
+    //function for api call
+    const callNoteApi = () => {
+        const srtValue = state.sortSelected.toString().replace('asc', '1').replace('desc', '-1');
+        let obj = {
+            num: state.paggiActive,
+            srt: srtValue
+        };
+        dispatch(dashboardDucks.getAllNote(obj));
     }
 
     return (

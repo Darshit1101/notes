@@ -8,12 +8,17 @@ import moment from 'moment';
 
 function ManageNotesCard(props) {
     const { state, changeNameValue, handledeleteModal, handleViewModal, handleDownloadModal } = props;
-
+    const { mode, setMode } = useSetIndexFiltersMode();
     const promotedBulkActions = [
         {
             content: 'Delete',
             onAction: () => props.onDeleteBulkAction()
         },
+    ];
+
+    const sortOptions = [
+        { label: "Date", value: "cdt asc", directionLabel: "A-Z" },
+        { label: "Date", value: "cdt desc", directionLabel: "Z-A" },
     ];
 
     return (
@@ -22,6 +27,16 @@ function ManageNotesCard(props) {
                 title={"Manage notes"}
             >
                 <Card padding={0}>
+                    <IndexFilters
+                        tabs={[]}
+                        mode={mode}
+                        setMode={setMode}
+
+                        onSort={(e) => changeNameValue({ sortSelected: e })}
+                        sortOptions={sortOptions}
+                        sortSelected={state.sortSelected}
+                    />
+
                     <IndexTable
                         itemCount={state.ManageNotes?.length}
                         headings={[
