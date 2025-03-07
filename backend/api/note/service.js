@@ -143,7 +143,7 @@ const getNotesByUserId = async (values) => {
     }
 
     //sort search filter condition 
-    if (srt != '' && srt !== undefined) {
+    if (srt) {
         let sortAry = srt.split(" ");
         _sort[sortAry[0]] = JSON.parse(sortAry[1]);
     } else {
