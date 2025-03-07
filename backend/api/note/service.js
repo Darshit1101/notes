@@ -157,8 +157,8 @@ const getNotesByUserId = async (values) => {
             { des: { $regex: srhtxt, $options: "i" } },
         ];
     }
-    console.log('query===>', query);
-    console.log('_sort===>', _sort);
+    // console.log('query===>', query);
+    // console.log('_sort===>', _sort);
 
     //Pagination set
     let _pageNo = PageNumber;
