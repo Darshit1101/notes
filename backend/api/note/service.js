@@ -136,7 +136,7 @@ const getNotesByUserId = async (values) => {
     const { ti, ctr, num, srt, srhtxt } = values;  // Deconstruct values
     const PageNumber = Number(num)//convert string to number
     const query = { ti };
-    const _sort = {};
+    let _sort = {};
 
     if (ctr) {
         query.ctr = ctr;  // Filter by category if provided
@@ -158,6 +158,7 @@ const getNotesByUserId = async (values) => {
         ];
     }
     console.log('query===>', query);
+    console.log('_sort===>', _sort);
 
     //Pagination set
     let _pageNo = PageNumber;
