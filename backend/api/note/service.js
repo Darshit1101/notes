@@ -135,11 +135,11 @@ const getNotesByUserId = async (values) => {
     // console.log('values=====>', values)
     const { ti, ctr, num, srt, srhtxt } = values;  // Deconstruct values
     const PageNumber = Number(num)//convert string to number
-    const query = { ti };
+    const _searchQRY = { ti };
     let _sort = {};
 
     if (ctr) {
-        query.ctr = ctr;  // Filter by category if provided
+        _searchQRY.ctr = ctr;  // Filter by category if provided
     }
 
     //sort filter condition 
@@ -152,12 +152,12 @@ const getNotesByUserId = async (values) => {
 
     //search filter condition
     if (srhtxt) {
-        query.$or = [
+        _searchQRY.$or = [
             { tit: { $regex: srhtxt, $options: "i" } },
             { des: { $regex: srhtxt, $options: "i" } },
         ];
     }
-    // console.log('query===>', query);
+    // console.log('_searchQRY===>', _searchQRY);
     // console.log('_sort===>', _sort);
 
     //Pagination set
@@ -167,12 +167,12 @@ const getNotesByUserId = async (values) => {
     let _take = parseInt(_pageSize);
 
     const queryPromise = PageNumber
-        ? modalForNote.find(query).skip(_skip).limit(_take).sort(_sort)
-        : modalForNote.find(query).sort(_sort);
+        ? modalForNote.find(_searchQRY).skip(_skip).limit(_take).sort(_sort)
+        : modalForNote.find(_searchQRY).sort(_sort);
 
     // Fetch count and notes in parallel to optimize performance
     const [count, notes] = await Promise.all([
-        modalForNote.countDocuments(query),
+        modalForNote.countDocuments(_searchQRY),
         queryPromise,
     ]);
 
