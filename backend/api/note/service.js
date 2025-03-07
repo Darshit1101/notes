@@ -142,7 +142,7 @@ const getNotesByUserId = async (values) => {
         query.ctr = ctr;  // Filter by category if provided
     }
 
-    //sort search filter condition 
+    //sort filter condition 
     if (srt) {
         let sortAry = srt.split(" ");
         _sort[sortAry[0]] = JSON.parse(sortAry[1]);
