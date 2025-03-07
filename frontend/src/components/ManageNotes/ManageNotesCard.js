@@ -35,6 +35,13 @@ function ManageNotesCard(props) {
                         onSort={(e) => changeNameValue({ sortSelected: e })}
                         sortOptions={sortOptions}
                         sortSelected={state.sortSelected}
+
+                        queryValue={state.queryValue}
+                        queryPlaceholder="Search..."
+                        onQueryChange={(e) => changeNameValue({ queryValue: e })}
+                        onQueryClear={() => changeNameValue({ queryValue: '' })}
+                        cancelAction={{ onAction: () => changeNameValue({ queryValue: '' }) }}
+                        filters={[]}
                     />
 
                     <IndexTable

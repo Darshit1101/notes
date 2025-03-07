@@ -19,7 +19,8 @@ function ManageNotes() {
         des: '',
         dawnloadDataModal: false,
         profile: {},
-        sortSelected: ['cdt desc']
+        sortSelected: ['cdt desc'],
+        queryValue: '',  //filter search value
     })
 
     //set data.
@@ -138,15 +139,21 @@ function ManageNotes() {
 
     //call main api on state change
     useEffect(() => {
-        callNoteApi();
-    }, [state.sortSelected, state.paggiActive])
+        // callNoteApi();
+        if (state.queryValue) {
+            let queryTimer = setTimeout(() => callNoteApi(), 1000);
+            return () => clearTimeout(queryTimer);
+        }
+        else callNoteApi();
+    }, [state.sortSelected, state.paggiActive, state.queryValue])
 
     //function for api call
     const callNoteApi = () => {
         const srtValue = state.sortSelected.toString().replace('asc', '1').replace('desc', '-1');
         let obj = {
             num: state.paggiActive,
-            srt: srtValue
+            srt: srtValue,
+            srhtxt: state.queryValue
         };
         dispatch(dashboardDucks.getAllNote(obj));
     }
