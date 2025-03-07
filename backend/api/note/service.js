@@ -30,9 +30,9 @@ module.exports = {
 
     getAllNotes: async (values) => {
         try {
-            const { ctr, num, srt } = values.body
+            const { ctr, num, srt, srhtxt } = values.body
             const { ti } = values.decoded
-            const { count, notes } = await getNotesByUserId({ ti, ctr, num, srt });
+            const { count, notes } = await getNotesByUserId({ ti, ctr, num, srt, srhtxt });
 
             return {
                 status: 200,
@@ -133,10 +133,10 @@ module.exports = {
 //main function for get notes
 const getNotesByUserId = async (values) => {
     // console.log('values=====>', values)
-    const { ti, ctr, num, srt } = values;  // Deconstruct values
+    const { ti, ctr, num, srt, srhtxt } = values;  // Deconstruct values
     const PageNumber = Number(num)//convert string to number
     const query = { ti };
-    let _sort = {};
+    const _sort = {};
 
     if (ctr) {
         query.ctr = ctr;  // Filter by category if provided
@@ -149,6 +149,15 @@ const getNotesByUserId = async (values) => {
     } else {
         _sort = { cdt: -1 };  // Default sorting by created date in descending order
     }
+
+    //search filter condition
+    if (srhtxt) {
+        query.$or = [
+            { tit: { $regex: srhtxt, $options: "i" } },
+            { des: { $regex: srhtxt, $options: "i" } },
+        ];
+    }
+    console.log('query===>', query);
 
     //Pagination set
     let _pageNo = PageNumber;
