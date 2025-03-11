@@ -102,6 +102,7 @@ const Dashboard = () => {
       nid: state.nid,
     }
     dispatch(dashboardDucks.editNote(obj))
+    changeNameValue({ Category: '' })
     openCloseModal('editNoteModal', state.editNoteModal, 'close');
   }
 
