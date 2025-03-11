@@ -3,6 +3,7 @@ import DashboardCard from "../../components/Dashboard/DashboardCard";
 import { useDispatch, useSelector } from "react-redux";
 import * as dashboardDucks from '../../ducks/dashboard';
 import './Dashboard.css';
+import { toastify } from '../../ducks/toast';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ const Dashboard = () => {
       dispatch(dashboardDucks.addNote(obj));
       clearState();
       openCloseModal('addNoteModal', state.addNoteModal, 'close');
+    }
+    else {
+      dispatch(toastify({ type: 'error', msg: 'Note cannot be empty!' }));
     }
   }
 
