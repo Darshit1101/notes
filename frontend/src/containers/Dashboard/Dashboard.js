@@ -100,7 +100,6 @@ const Dashboard = () => {
       des: state.des,
       ctr: state.selectedCategory,
       nid: state.nid,
-      uid: localStorage.getItem('id')
     }
     dispatch(dashboardDucks.editNote(obj))
     openCloseModal('editNoteModal', state.editNoteModal, 'close');
