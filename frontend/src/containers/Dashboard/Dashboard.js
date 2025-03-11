@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   //handle open add modal note
   const handleAddNote = () => {
-    clearState();
+    changeNameValue({ tit: "", des: "", selectedCategory: 'all', })
     openCloseModal('addNoteModal', state.addNoteModal, 'open');
   }
 
