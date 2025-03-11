@@ -13,13 +13,10 @@ function Sidebar() {
   };
 
   const [count, setCount] = useState(0);
-  console.log('count', count);
-  console.log('String(count)', String(count));
 
   const getNoteCount = useSelector(state => state.dashboard.getAll?.count)
-  console.log('getNoteCount', getNoteCount);
   useEffect(() => {
-    if (getNoteCount) {
+    if (getNoteCount !== undefined && getNoteCount !== null) {
       setCount(getNoteCount);
     }
   }, [getNoteCount]);
