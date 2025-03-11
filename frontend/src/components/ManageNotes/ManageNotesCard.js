@@ -76,7 +76,13 @@ function ManageNotesCard(props) {
                                             {props.getIndexNumber(index)}
                                         </Text>
                                     </IndexTable.Cell>
-                                    <IndexTable.Cell><div id='noteTitle'>{i.tit}</div></IndexTable.Cell>
+                                    <IndexTable.Cell>
+                                        <div style={{ display: 'inline-block' }}>
+                                            <Tooltip id='textwidthmobi' width='wide' padding="400" dismissOnMouseOut content={<Text>{i.tit}</Text>}>
+                                                <div id='noteTitle'>{i.tit}</div>
+                                            </Tooltip>
+                                        </div>
+                                    </IndexTable.Cell>
                                     <IndexTable.Cell>{moment(new Date(i.cdt)).format('MMM-DD-YYYY hh:mm:ss a')}</IndexTable.Cell>
 
                                     <IndexTable.Cell>
