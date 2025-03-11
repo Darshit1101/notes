@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from '@shopify/polaris';
 import { HomeIcon, HomeFilledIcon, WorkFilledIcon, WorkIcon, SettingsFilledIcon, SettingsIcon, FileFilledIcon, FileIcon } from '@shopify/polaris-icons';
+import { useSelector } from "react-redux";
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -10,6 +11,18 @@ function Sidebar() {
   const changeRoute = (pathName) => {
     navigate(pathName);
   };
+
+  const [count, setCount] = useState(0);
+  console.log('count', count);
+  console.log('String(count)', String(count));
+
+  const getNoteCount = useSelector(state => state.dashboard.getAll?.count)
+  console.log('getNoteCount', getNoteCount);
+  useEffect(() => {
+    if (getNoteCount) {
+      setCount(getNoteCount);
+    }
+  }, [getNoteCount]);
 
   return (
     <div>
@@ -21,6 +34,7 @@ function Sidebar() {
               icon: path === '/dashboard' ? HomeFilledIcon : HomeIcon,
               selected: path === '/dashboard',
               onClick: () => changeRoute('/dashboard'),
+              badge: count ? String(count) : undefined,
             },
             {
               label: 'Manage notes',
