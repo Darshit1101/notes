@@ -112,12 +112,12 @@ function ManageNotes() {
 
     //get number of totaldata
     useEffect(() => {
-        changeNameValue({ pageNumber: parseInt(Math.ceil(noteCount / 5)) });
+        changeNameValue({ pageNumber: parseInt(Math.ceil(noteCount / 10)) });
     }, [noteCount]);
 
     // Function to get the correct index number based on pagination
     const getIndexNumber = (index) => {
-        const itemsPerPage = 5;  // Change this based on your pagination setting
+        const itemsPerPage = 10;  // Change this based on your pagination setting
         const startIndex = (state.paggiActive - 1) * itemsPerPage;
         return startIndex + index + 1;
     };
