@@ -51,15 +51,17 @@ const Dashboard = () => {
 
   //handle save note
   const handleSaveNote = () => {
-    let obj = {
-      tit: state.tit,
-      des: state.des,
-      ctr: state.selectedCategory,
-      uid: localStorage.getItem('id')
+    if (state.tit || state.des) {
+      let obj = {
+        tit: state.tit,
+        des: state.des,
+        ctr: state.selectedCategory,
+        uid: localStorage.getItem('id')
+      }
+      dispatch(dashboardDucks.addNote(obj));
+      clearState();
+      openCloseModal('addNoteModal', state.addNoteModal, 'close');
     }
-    dispatch(dashboardDucks.addNote(obj));
-    clearState();
-    openCloseModal('addNoteModal', state.addNoteModal, 'close');
   }
 
   //delete note particular
