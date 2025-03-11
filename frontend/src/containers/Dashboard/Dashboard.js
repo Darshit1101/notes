@@ -52,7 +52,7 @@ const Dashboard = () => {
 
   //handle save note
   const handleSaveNote = () => {
-    if (state.tit || state.des) {
+    if (state.tit.trim() || state.des.trim()) {
       let obj = {
         tit: state.tit,
         des: state.des,
