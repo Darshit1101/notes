@@ -21,5 +21,8 @@ module.exports = {
         const data = await service.editNote(req);
         res.status(data.status).send(data.data);
     },
-
+    exportNote: async (req, res) => {
+        const data = await service.exportNote(req);
+        res.status(data.status).send(data.data);
+    },
 }

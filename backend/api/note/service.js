@@ -126,9 +126,25 @@ module.exports = {
             console.error('addNote===>', error);
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
         }
+    },
+    exportNote: async (values) => {
+        try {
+            const { ti } = values.decoded;
+            console.log(ti);
+
+            return {
+                status: 200,
+                data: {
+                    status: 'success',
+                },
+            }
+        }
+        catch (error) {
+            console.error('exportNote===>', error);
+            return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
+        }
     }
 }
-
 
 //main function for get notes
 const getNotesByUserId = async (values) => {
