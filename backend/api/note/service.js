@@ -1,3 +1,7 @@
+const { Parser } = require('json2csv');
+const fs = require('fs');
+const path = require('path');
+
 module.exports = {
     addNote: async (values) => {
         try {
@@ -134,19 +138,36 @@ module.exports = {
             // get user review data
             let noteData = await modalForNote.find({ ti: ti }).sort({ cdt: -1 });
             // console.log('noteData', noteData);
-
-            let jsonData = [];
-            if (noteData && noteData.length > 0) {
-                for (let i = 0; i < noteData.length; i++) {
-                    const review = noteData[i];
-                    // console.log('review=====>', review);
-                }
+            if (!noteData || noteData.length === 0) {
+                return {
+                    status: 404,
+                    data: {
+                        status: 'error',
+                        m: 'No notes found',
+                    },
+                };
             }
+
+            // Convert JSON data to CSV format
+            const fields = ['_id', 'tit', 'des', 'ctr']; // Modify fields as per your schema
+            const opts = { fields };
+            const parser = new Parser(opts);
+            const csv = parser.parse(noteData);
+
+            // Define file path
+            const exportDir = path.join(__dirname, 'exports');
+            if (!fs.existsSync(exportDir)) {
+                fs.mkdirSync(exportDir, { recursive: true });
+            }
+            const filePath = path.join(exportDir, `notes_${ti}.csv`);
+            fs.writeFileSync(filePath, csv);
 
             return {
                 status: 200,
                 data: {
                     status: 'success',
+                    m: 'CSV file generated successfully',
+                    filePath,
                 },
             }
         }
