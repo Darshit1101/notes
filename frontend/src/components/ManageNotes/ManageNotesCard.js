@@ -145,9 +145,9 @@ function ManageNotesCard(props) {
                 <Modal.Section>
                     <div id='main-note-box'>
                         <div className='dawn_Modal_title'>{state.tit}</div>
-                        <Box paddingBlockStart={400}>
-                            <Divider />
-                        </Box>
+                        {state.des && <Box paddingBlockStart={400}>
+                            <Divider borderColor="border-inverse" />
+                        </Box>}
                         <Box paddingBlockStart={400}>
                             <div className='data_desc'>{state.des}</div>
                         </Box>
