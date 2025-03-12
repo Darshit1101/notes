@@ -130,7 +130,18 @@ module.exports = {
     exportNote: async (values) => {
         try {
             const { ti } = values.decoded;
-            console.log(ti);
+
+            // get user review data
+            let noteData = await modalForNote.find({ ti: ti }).sort({ cdt: -1 });
+            // console.log('noteData', noteData);
+
+            let jsonData = [];
+            if (noteData && noteData.length > 0) {
+                for (let i = 0; i < noteData.length; i++) {
+                    const review = noteData[i];
+                    // console.log('review=====>', review);
+                }
+            }
 
             return {
                 status: 200,
