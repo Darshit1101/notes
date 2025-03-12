@@ -158,6 +158,11 @@ function ManageNotes() {
         dispatch(dashboardDucks.getAllNote(obj));
     }
 
+    //export note
+    const handleExportNote = () => {
+        dispatch(dashboardDucks.exportNote())
+    }
+
     return (
         <ManageNotesCard
             state={state}
@@ -172,6 +177,7 @@ function ManageNotes() {
             openCloseModal={openCloseModal}
             handleDownloadModal={handleDownloadModal}
             handleSaveNote={handleSaveNote}
+            handleExportNote={handleExportNote}
         />
     )
 }

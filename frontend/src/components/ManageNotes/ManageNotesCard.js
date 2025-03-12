@@ -3,7 +3,7 @@ import {
     IndexTable, useSetIndexFiltersMode, Divider, InlineStack, DatePicker, IndexFilters, useBreakpoints, Text, Card, Page, Button, Popover, Box, ButtonGroup, Modal, PageActions, InlineGrid, TextField, OptionList, Tooltip,
     BlockStack, IndexFiltersMode, EmptySearchResult, Banner, Icon,
 } from "@shopify/polaris";
-import { ViewIcon, DeleteIcon, PageDownIcon } from '@shopify/polaris-icons';
+import { ViewIcon, DeleteIcon, PageDownIcon, ImportIcon, ExportIcon } from '@shopify/polaris-icons';
 import moment from 'moment';
 
 function ManageNotesCard(props) {
@@ -25,7 +25,15 @@ function ManageNotesCard(props) {
         <div>
             <Page
                 title={"Manage notes"}
-            >
+                secondaryActions={
+                    <div className='btn-group btn-manage-reviews-head'>
+                        <ButtonGroup>
+                            {/* <Button icon={ImportIcon}>Import</Button> */}
+                            <Button icon={ExportIcon} onClick={props.handleExportNote}>Export</Button>
+                        </ButtonGroup>
+                    </div>
+                }>
+
                 <Card padding={0}>
                     <IndexFilters
                         tabs={[]}

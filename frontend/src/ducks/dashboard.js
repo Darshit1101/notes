@@ -13,7 +13,8 @@ const dashboard = createSlice({
     },
     deleteCard: (state, action) => { },
     editNote: (state, action) => { },
-    deleteBulkNotes: (state, action) => { }
+    deleteBulkNotes: (state, action) => { },
+    exportNote: (state, action) => { },
   }
 });
 
@@ -23,7 +24,8 @@ export const {
   getAllNoteSuccess,
   deleteCard,
   editNote,
-  deleteBulkNotes
+  deleteBulkNotes,
+  exportNote
 } = dashboard.actions;
 
 export default dashboard.reducer;

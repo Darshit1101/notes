@@ -93,12 +93,30 @@ function* editNote(action) {
   }
 }
 
+function* exportNote(action) {
+  try {
+    yield put(load());
+    const res = yield call(api.POST, '/exportNote', action.payload);
+    if (res.status === 'success') {
+      yield put(toastify({ type: 'success', msg: res.m }));
+    }
+    else {
+      yield put(toastify({ type: 'error', msg: res.m }));
+    }
+    yield put(loaded());
+  } catch (error) {
+    yield put(loaded());
+    yield put(toastify({ type: 'error', msg: 'Something went wrong while doing. Please try again.' }));
+  }
+}
+
 export function* watchGetDashboard() {
   yield takeLatest(actions.addNote.type, addNote);
   yield takeLatest(actions.getAllNote.type, getAllNote);
   yield takeLatest(actions.deleteCard.type, deleteCard);
   yield takeLatest(actions.editNote.type, editNote);
   yield takeLatest(actions.deleteBulkNotes.type, deleteBulkNotes);
+  yield takeLatest(actions.exportNote.type, exportNote);
 }
 
 export default function* rootSaga() {
