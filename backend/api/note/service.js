@@ -148,8 +148,23 @@ module.exports = {
                 };
             }
 
+            // Add index to each row
+            noteData = noteData.map((note, index) => ({
+                index: index + 1, // Start index from 1
+                _id: note._id,
+                tit: note.tit,
+                des: note.des,
+                ctr: note.ctr,
+            }));
+
             // Convert JSON data to CSV format
-            const fields = ['_id', 'tit', 'des', 'ctr']; // Modify fields as per your schema
+            const fields = [
+                { label: 'Index', value: 'index' },
+                { label: 'Note ID', value: '_id' },
+                { label: 'Title', value: 'tit' },
+                { label: 'Description', value: 'des' },
+                { label: 'Category', value: 'ctr' }
+            ];
             const opts = { fields };
             const parser = new Parser(opts);
             const csv = parser.parse(noteData);
