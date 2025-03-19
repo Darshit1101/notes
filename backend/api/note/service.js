@@ -191,6 +191,67 @@ module.exports = {
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
         }
     }
+    // exportNote: async (values) => {
+    //     try {
+    //         const { ti } = values.decoded;
+
+    //         // Get user review data
+    //         let noteData = await modalForNote.find({ ti: ti }).sort({ cdt: -1 });
+
+    //         if (!noteData || noteData.length === 0) {
+    //             return {
+    //                 status: 404,
+    //                 data: {
+    //                     status: 'error',
+    //                     message: 'No notes found',
+    //                 },
+    //             };
+    //         }
+
+    //         // Add index to each row
+    //         noteData = noteData.map((note, index) => ({
+    //             index: index + 1, // Start index from 1
+    //             _id: note._id,
+    //             tit: note.tit,
+    //             des: note.des,
+    //             ctr: note.ctr,
+    //         }));
+
+    //         // Convert JSON data to CSV format
+    //         const fields = [
+    //             { label: 'Index', value: 'index' },
+    //             { label: 'Note ID', value: '_id' },
+    //             { label: 'Title', value: 'tit' },
+    //             { label: 'Description', value: 'des' },
+    //             { label: 'Category', value: 'ctr' }
+    //         ];
+    //         const opts = { fields };
+    //         const parser = new Parser(opts);
+    //         const csv = parser.parse(noteData);
+
+    //         // Convert CSV data to Buffer (so it can be sent directly)
+    //         const csvBuffer = Buffer.from(csv, 'utf-8');
+
+    //         return {
+    //             status: 200,
+    //             data: {
+    //                 status: 'success',
+    //                 message: 'CSV file generated successfully',
+    //                 filename: `notes_${ti}.csv`,
+    //                 csvData: csvBuffer.toString('base64'), // Send as base64 string
+    //             },
+    //         };
+    //     } catch (error) {
+    //         console.error('exportNote===>', error);
+    //         return {
+    //             status: 500,
+    //             data: {
+    //                 status: 'error',
+    //                 message: 'Internal server error',
+    //             },
+    //         };
+    //     }
+    // }
 }
 
 //main function for get notes
