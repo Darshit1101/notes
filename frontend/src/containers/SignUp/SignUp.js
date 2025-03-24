@@ -1,5 +1,5 @@
 import SignUpCard from "../../components/SignUp/SignUpCard";
-import React, { useCallback, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import * as loginDucks from '../../ducks/login';
 import SimpleReactValidator from "simple-react-validator";
@@ -14,7 +14,7 @@ const SignUp = () => {
     pd: '',
     errMessage: {}
   })
-  
+
   const changeNameValue = useCallback((obj) => {
     setState((prevState) => ({ ...prevState, ...obj }));
   }, []);
@@ -47,4 +47,5 @@ const SignUp = () => {
   )
 }
 
-export default SignUp;
+// export default SignUp;
+export default memo(SignUp);
