@@ -9,6 +9,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  background : url('./containers/App/Assets/img/pro_blur.png')
 }
 
 .page-login-wrap .Polaris-Page {
