@@ -100,7 +100,6 @@ function* exportNote(action) {
     if (res.status === 'success') {
       if (res.filePath) {
         // window.open(res.filePath);
-        console.log(res.filePath);
       }
       yield put(toastify({ type: 'success', msg: res.m }));
     }
