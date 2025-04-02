@@ -98,6 +98,10 @@ function* exportNote(action) {
     yield put(load());
     const res = yield call(api.POST, '/exportNote', action.payload);
     if (res.status === 'success') {
+      if (res.filePath) {
+        // window.open(res.filePath);
+        console.log(res.filePath);
+      }
       yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {
