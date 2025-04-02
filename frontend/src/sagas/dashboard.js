@@ -98,7 +98,6 @@ function* exportNote(action) {
     yield put(load());
     const res = yield call(api.POST, '/exportNote', action.payload);
     if (res.status === 'success') {
-      // downloadCSV(res.csvData, res.filename);
       yield put(toastify({ type: 'success', msg: res.m }));
     }
     else {
@@ -109,16 +108,6 @@ function* exportNote(action) {
     yield put(loaded());
     yield put(toastify({ type: 'error', msg: 'Something went wrong while doing. Please try again.' }));
   }
-}
-
-function downloadCSV(csvData, filename) {
-  const blob = new Blob([atob(csvData)], { type: 'text/csv' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
 }
 
 export function* watchGetDashboard() {
