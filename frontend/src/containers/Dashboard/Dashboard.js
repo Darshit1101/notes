@@ -61,6 +61,7 @@ const Dashboard = () => {
       }
       dispatch(dashboardDucks.addNote(obj));
       clearState();
+      changeNameValue({notesValue: ''})
       openCloseModal('addNoteModal', state.addNoteModal, 'close');
     }
     else {
@@ -106,7 +107,7 @@ const Dashboard = () => {
       nid: state.nid,
     }
     dispatch(dashboardDucks.editNote(obj))
-    changeNameValue({ Category: '' })
+    changeNameValue({ Category: '',notesValue: '' })
     openCloseModal('editNoteModal', state.editNoteModal, 'close');
   }
 
