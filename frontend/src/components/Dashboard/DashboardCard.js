@@ -11,7 +11,7 @@ function DashboardCard(props) {
   const isLoading = useSelector(state => state.loading.isLoading);
 
   const options = [
-    { label: 'All', value: 'all' },
+    { label: 'All', value: '' },
     { label: 'Personal', value: 'personal' },
     { label: 'Shopping', value: 'shopping' },
     { label: 'Health', value: 'health' },
@@ -22,7 +22,7 @@ function DashboardCard(props) {
   ];
 
   const selectCategory = [
-    { content: 'All', onAction: () => handleCategorySelection('All', 'all') },
+    { content: 'All', onAction: () => handleCategorySelection('All', '') },
     { content: 'Personal', onAction: () => handleCategorySelection('Personal', 'personal') },
     { content: 'Shopping', onAction: () => handleCategorySelection('Shopping', 'shopping') },
     { content: 'Health', onAction: () => handleCategorySelection('Health', 'health') },

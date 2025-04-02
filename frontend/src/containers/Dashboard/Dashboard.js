@@ -46,7 +46,7 @@ const Dashboard = () => {
 
   //handle open add modal note
   const handleAddNote = () => {
-    changeNameValue({ tit: "", des: "", selectedCategory: 'all', })
+    changeNameValue({ tit: "", des: "", selectedCategory: '', })
     openCloseModal('addNoteModal', state.addNoteModal, 'open');
   }
 
@@ -115,7 +115,7 @@ const Dashboard = () => {
     let obj = {
       tit: "",
       des: "",
-      selectedCategory: 'all',
+      selectedCategory: '',
       Category: ''
     }
     changeNameValue(obj);
@@ -142,13 +142,17 @@ const Dashboard = () => {
     let objData = {};
 
     // Conditionally manage the `ctr` property in objData
-    if (value === 'all') {
+    if (value === '') {
       delete objData.ctr; // Remove `ctr` for default API call
     } else {
       objData.ctr = value; // Add `ctr` for filtering
     }
     dispatch(dashboardDucks.getAllNote(objData));
   };
+
+  useEffect(() => {
+    changeNameValue({ notesValue: '' })
+  }, [state.Category])
 
   return (
     <div>
