@@ -136,8 +136,7 @@ const Dashboard = () => {
 
   //category wise data show
   const handleCategorySelection = (label, value) => {
-    const newCategory = label === 'All' ? '' : label;
-    changeNameValue({ popoverActive: false, Category: newCategory });
+    changeNameValue({ popoverActive: false, Category: label === 'All' ? '' : label });
 
     let objData = {};
 
