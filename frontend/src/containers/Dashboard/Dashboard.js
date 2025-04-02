@@ -138,15 +138,11 @@ const Dashboard = () => {
   const handleCategorySelection = (label, value) => {
     changeNameValue({ popoverActive: false, Category: label === 'All' ? '' : label });
 
-    let objData = {};
-
-    // Conditionally manage the `ctr` property in objData
-    if (value === '') {
-      delete objData.ctr; // Remove `ctr` for default API call
+    if (value) {
+      dispatch(dashboardDucks.getAllNote({ ctr: value }));
     } else {
-      objData.ctr = value; // Add `ctr` for filtering
+      dispatch(dashboardDucks.getAllNote()); // Call without an argument
     }
-    dispatch(dashboardDucks.getAllNote(objData));
   };
 
   useEffect(() => {
