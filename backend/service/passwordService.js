@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 const saltRounds = 12;
-const CryptoJS = require("crypto-js");
-const _secretKey = "aSd3Rqwe3gn&%3)@3"; //this key should be same in frontend
+const CryptoJS = require('crypto-js');
+const _secretKey = 'aSd3Rqwe3gn&%3)@3'; //this key should be same in frontend
 // const SimpleCrypto = require('simple-crypto-js').default;
 // const simpleCrypto = new SimpleCrypto(_secretKey);
 
@@ -22,16 +22,13 @@ exports.decryptPwd = function (cipherText) {
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
     return originalPassword;
   } catch (error) {
-    console.log("Error in decryptPwd: ", error);
+    console.log('Error in decryptPwd: ', error);
   }
 };
 
 //plainText is the password to be encrypted (Change password time use)
 exports.encryptPwd = function (plainText) {
   // return simpleCrypto.encrypt(plainText);
-  const encryptPassword = CryptoJS.AES.encrypt(
-    plainText,
-    _secretKey
-  ).toString();
+  const encryptPassword = CryptoJS.AES.encrypt(plainText, _secretKey).toString();
   return encryptPassword;
 };
