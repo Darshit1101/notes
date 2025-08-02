@@ -131,6 +131,7 @@ module.exports = {
             return ({ status: 500, data: { status: 'error', m: msgObj.ERROR } });
         }
     },
+    
     exportNote: async (values) => {
         try {
             const { ti } = values.decoded;
