@@ -10,7 +10,12 @@ function* getProfile(action) {
     const res = yield call(api.GET, "/getProfile", action.payload);
     if (res.status === "success") {
       yield put(actions.getProfileSuccess(res.data));
-    } else {
+    }
+    else if (res.status === 'Unauthorized') {
+      localStorage.clear();
+      window.location.href = '/login';
+    }
+    else {
       yield put(toastify({ type: "error", msg: res.m }));
     }
     yield put(loaded());
